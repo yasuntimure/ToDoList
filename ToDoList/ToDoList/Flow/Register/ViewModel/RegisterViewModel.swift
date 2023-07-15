@@ -25,10 +25,21 @@ class RegisterViewModel: ObservableObject {
         password.validation = getPasswordValidation()
         confirmPassword.validation = getConfirmValidation()
         
-        guard email.validation == .email(.approved) && password.validation == .password(.approved) else { return }
+        guard name.validation == .name(.approved) &&
+                email.validation == .email(.approved) &&
+                password.validation == .password(.approved) &&
+                confirmPassword.validation == .confirm_password(.approved) else { return }
+        
+        // Try Register
+        Auth.auth().createUser(withEmail: email.text, password: password.text) { result, error in
+            guard let user = result?.user, error == nil else {
+                print("Error: \(error!.localizedDescription)")
+                return
+            }
             
-        // Try login
-        //  Auth.auth().signIn(withEmail: email, password: password)
+            print("User: \(user)")
+        }
+        
         print("Try login")
         
     }
@@ -77,6 +88,6 @@ class RegisterViewModel: ObservableObject {
         
         return .confirm_password(.approved)
     }
-        
+    
 }
 

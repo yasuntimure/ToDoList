@@ -7,28 +7,14 @@
 
 import Foundation
 import Firebase
-import Combine
 
 class LoginViewModel: ObservableObject {
     
-//    var subscribers = Set<AnyCancellable>()
     
     @Published var email: InputField = InputField(placeholder: "Enter Email", text: "", validation: Validation.none)
     @Published var password: InputField = InputField(placeholder: "Enter Password", text: "", validation: Validation.none)
     
-    init() {
-//        $email
-//            .dropFirst()
-//            .sink { _ in
-//            self.email.validation = .none
-//        }.store(in: &subscribers)
-//
-//        $password
-//            .dropFirst()
-//            .sink { _ in
-//            self.password.validation = .none
-//        }.store(in: &subscribers)
-    }
+    init() {}
     
     func login() {
         
@@ -37,9 +23,15 @@ class LoginViewModel: ObservableObject {
         
         guard email.validation == .email(.approved) && password.validation == .password(.approved) else { return }
             
-        // Try login
-        //  Auth.auth().signIn(withEmail: email, password: password)
-        print("Try login")
+        // Try Login
+        Auth.auth().signIn(withEmail: email.text, password: password.text) { result, error in
+            guard let user = result?.user, error == nil else {
+                print("Error: \(error!.localizedDescription)")
+                return
+            }
+            
+            print("User: \(user)")
+        }
         
     }
     
