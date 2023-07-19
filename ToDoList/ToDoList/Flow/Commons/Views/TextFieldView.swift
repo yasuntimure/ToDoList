@@ -39,17 +39,22 @@ struct TextFieldView: View {
                     .textInputAutocapitalization(.never)
             }
         }
+            .padding(.horizontal)
     }
 
 }
 
 struct TextFieldView_Previews: PreviewProvider {
+
+
+    static var email: InputField = InputField(placeholder: "Enter Email",
+                                              text: "yasuntimure@gmail.com",
+                                              validation: .email(.approved))
+
     static var previews: some View {
-        
-        @State var email: InputField = InputField(placeholder: "Enter Email",
-                                                  text: "yasuntimure@gmail.com",
-                                                  validation: .email(.approved))
-        
-        TextFieldView(input: $email, isSecure: false)
+        Stateful(value: email) { email in
+            TextFieldView(input: email, isSecure: false)
+                .previewLayout(.fixed(width: ScreenSize.width, height: ScreenSize.height/8))
+        }
     }
 }

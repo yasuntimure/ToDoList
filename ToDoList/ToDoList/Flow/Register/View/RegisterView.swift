@@ -25,19 +25,18 @@ struct RegisterView: View {
                 
                 VStack (spacing: 10) {
                     
-                    TextFieldView(input: $viewModel.name, isSecure: false)
+                    TextFieldView(input: $viewModel.nameField, isSecure: false)
                     
-                    TextFieldView(input: $viewModel.email, isSecure: false)
+                    TextFieldView(input: $viewModel.emailField, isSecure: false)
                     
-                    TextFieldView(input: $viewModel.password, isSecure: true)
+                    TextFieldView(input: $viewModel.passwordField, isSecure: true)
                     
-                    TextFieldView(input: $viewModel.confirmPassword, isSecure: true)
+                    TextFieldView(input: $viewModel.confirmPasswordField, isSecure: true)
                     
                 }
                 .padding(.top, ScreenSize.width/10)
-                .padding([.leading, .trailing], 20)
                 
-                ButtonView(title: "Register") {
+                PrimaryButtonView(title: "Register") {
                     viewModel.register()
                 }
                 .padding(.top, ScreenSize.width/15)

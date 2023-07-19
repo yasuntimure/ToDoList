@@ -10,7 +10,6 @@ import Firebase
 
 class LoginViewModel: ObservableObject {
     
-    
     @Published var email: InputField = InputField(placeholder: "Enter Email", text: "", validation: Validation.none)
     @Published var password: InputField = InputField(placeholder: "Enter Password", text: "", validation: Validation.none)
     
@@ -24,16 +23,22 @@ class LoginViewModel: ObservableObject {
         guard email.validation == .email(.approved) && password.validation == .password(.approved) else { return }
             
         // Try Login
-        Auth.auth().signIn(withEmail: email.text, password: password.text) { result, error in
-            guard let user = result?.user, error == nil else {
+        Auth.auth().signIn(withEmail: email.text, password: password.text) { [weak self] result, error in
+        
+            guard let userId = result?.user.uid, error == nil else {
                 print("Error: \(error!.localizedDescription)")
                 return
             }
-            
-            print("User: \(user)")
+
         }
-        
     }
+    
+}
+
+
+// MARK: - Validation
+
+extension LoginViewModel {
     
     func getEmailValidationStatus() -> Validation {
         
@@ -60,8 +65,6 @@ class LoginViewModel: ObservableObject {
         
         return .password(.approved)
     }
-        
-    
 }
 
 

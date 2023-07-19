@@ -25,11 +25,10 @@ struct LoginView: View {
                     TextFieldView(input: $viewModel.email, isSecure: false)
                     TextFieldView(input: $viewModel.password, isSecure: true)
                 }
-                .padding([.leading, .trailing], 20)
                 .padding(.top, ScreenSize.width/6)
                 
                 
-                ButtonView(title: "Login") {
+                PrimaryButtonView(title: "Login") {
                     viewModel.login()
                 }
                 .padding(.bottom, ScreenSize.width/8)

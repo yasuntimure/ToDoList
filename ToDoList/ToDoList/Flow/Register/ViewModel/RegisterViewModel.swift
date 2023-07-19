@@ -11,83 +11,100 @@ import Combine
 
 class RegisterViewModel: ObservableObject {
     
-    @Published var name: InputField = InputField(placeholder: "Enter Name", text: "", validation: Validation.none)
-    @Published var email: InputField = InputField(placeholder: "Enter Email", text: "", validation: Validation.none)
-    @Published var password: InputField = InputField(placeholder: "Enter Password", text: "", validation: Validation.none)
-    @Published var confirmPassword: InputField = InputField(placeholder: "Confirm Password", text: "", validation: Validation.none)
+    @Published var nameField: InputField = InputField(placeholder: "Enter Name", text: "", validation: Validation.none)
+    @Published var emailField: InputField = InputField(placeholder: "Enter Email", text: "", validation: Validation.none)
+    @Published var passwordField: InputField = InputField(placeholder: "Enter Password", text: "", validation: Validation.none)
+    @Published var confirmPasswordField: InputField = InputField(placeholder: "Confirm Password", text: "", validation: Validation.none)
     
     init() {}
     
     func register() {
+        nameField.validation = getNameValidation()
+        emailField.validation = getEmailValidation()
+        passwordField.validation = getPasswordValidation()
+        confirmPasswordField.validation = getConfirmValidation()
         
-        name.validation = getNameValidation()
-        email.validation = getEmailValidation()
-        password.validation = getPasswordValidation()
-        confirmPassword.validation = getConfirmValidation()
-        
-        guard name.validation == .name(.approved) &&
-                email.validation == .email(.approved) &&
-                password.validation == .password(.approved) &&
-                confirmPassword.validation == .confirm_password(.approved) else { return }
+        guard nameField.validation == .name(.approved) &&
+                emailField.validation == .email(.approved) &&
+                passwordField.validation == .password(.approved) &&
+                confirmPasswordField.validation == .confirm_password(.approved) else { return }
         
         // Try Register
-        Auth.auth().createUser(withEmail: email.text, password: password.text) { result, error in
-            guard let user = result?.user, error == nil else {
+        Auth.auth().createUser(withEmail: emailField.text, password: passwordField.text) { [weak self] result, error in
+            guard let userId = result?.user.uid, error == nil else {
                 print("Error: \(error!.localizedDescription)")
                 return
             }
             
-            print("User: \(user)")
+            self?.insertUserId(userId)
         }
-        
-        print("Try login")
-        
     }
-    
+
+    func insertUserId(_ userId: String) {
+        let newUser = User (
+            id: userId,
+            name: nameField.text,
+            email: emailField.text,
+            password: passwordField.text,
+            joinDate: Date().timeIntervalSince1970
+        )
+
+        let database = Firestore.firestore()
+
+        database.collection("users")
+            .document(userId)
+            .setData(newUser.asDictionary())
+    }
+}
+
+
+// MARK: - Validation
+
+extension RegisterViewModel {
+
     func getNameValidation() -> Validation {
-        guard !name.text.trimmingCharacters(in: .whitespaces).isEmpty else {
+        guard !nameField.text.trimmingCharacters(in: .whitespaces).isEmpty else {
             return .name(.empty)
         }
         return .name(.approved)
     }
-    
+
     func getEmailValidation() -> Validation {
-        
-        guard !email.text.trimmingCharacters(in: .whitespaces).isEmpty else {
+
+        guard !emailField.text.trimmingCharacters(in: .whitespaces).isEmpty else {
             return .email(.empty)
         }
-        
-        guard email.text.contains("@") && email.text.contains(".") else {
+
+        guard emailField.text.contains("@") && emailField.text.contains(".") else {
             return .email(.invalid)
         }
-        
+
         return .email(.approved)
     }
-    
+
     func getPasswordValidation() -> Validation {
-        
-        guard !password.text.trimmingCharacters(in: .whitespaces).isEmpty else {
+
+        guard !passwordField.text.trimmingCharacters(in: .whitespaces).isEmpty else {
             return .password(.empty)
         }
-        
-        guard password.text.count < 64 && password.text.count >= 6 else {
+
+        guard passwordField.text.count < 64 && passwordField.text.count >= 6 else {
             return .password(.invalid)
         }
-        
+
         return .password(.approved)
     }
-    
+
     func getConfirmValidation() -> Validation {
-        guard !confirmPassword.text.trimmingCharacters(in: .whitespaces).isEmpty else {
+        guard !confirmPasswordField.text.trimmingCharacters(in: .whitespaces).isEmpty else {
             return .confirm_password(.empty)
         }
-        
-        guard confirmPassword.text == password.text else {
+
+        guard confirmPasswordField.text == passwordField.text else {
             return .confirm_password(.invalid)
         }
-        
+
         return .confirm_password(.approved)
     }
-    
 }
 
