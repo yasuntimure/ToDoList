@@ -36,7 +36,7 @@ struct RegisterView: View {
                 }
                 .padding(.top, ScreenSize.width/10)
                 
-                PrimaryButtonView(title: "Register") {
+                PrimaryButton(title: "Register") {
                     viewModel.register()
                 }
                 .padding(.top, ScreenSize.width/15)

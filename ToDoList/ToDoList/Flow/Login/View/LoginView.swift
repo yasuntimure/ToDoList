@@ -10,8 +10,11 @@ import SwiftUI
 struct LoginView: View {
     
     @StateObject var viewModel = LoginViewModel()
-    
+
+    @Binding var userLoggedIn: Bool
+
     var body: some View {
+    
         ZStack {
             
             GradientView()
@@ -27,10 +30,13 @@ struct LoginView: View {
                 }
                 .padding(.top, ScreenSize.width/6)
                 
-                
-                PrimaryButtonView(title: "Login") {
-                    viewModel.login()
+
+                PrimaryButton(title: "Login") {
+                    viewModel.login {
+                        userLoggedIn = true
+                    }
                 }
+
                 .padding(.bottom, ScreenSize.width/8)
                 
                 VStack (spacing: 5) {
@@ -48,6 +54,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(userLoggedIn: .constant(false))
     }
 }

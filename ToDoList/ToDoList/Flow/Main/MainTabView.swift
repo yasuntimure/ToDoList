@@ -11,12 +11,15 @@ struct MainTabView: View {
 
     @StateObject var viewModel = MainTabViewModel()
 
-    var body: some View {
+    @State var userLoggedIn: Bool = false
 
-        if userLoggedIn {
-            AccountView
-        } else {
-            LoginView()
+    var body: some View {
+        NavigationView {
+            if userLoggedIn {
+                AccountView
+            } else {
+                LoginView(userLoggedIn: $userLoggedIn)
+            }
         }
     }
 }
@@ -24,12 +27,12 @@ struct MainTabView: View {
 
 // MARK: - User Login Condition
 
-extension MainTabView {
+//extension MainTabView {
 
-    var userLoggedIn: Bool {
-        return viewModel.isSigned && !viewModel.currentUserId.isEmpty
-    }
-}
+//    var userLoggedIn: Bool {
+//        return false // viewModel.isSigned && !viewModel.currentUserId.isEmpty
+//    }
+//}
 
 
 

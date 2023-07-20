@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PlusButtonView: View {
+struct PlusButton: View {
 
     var size: CGFloat = 20
 
@@ -32,9 +32,9 @@ struct PlusButtonView: View {
     }
 }
 
-struct PlusButtonView_Previews: PreviewProvider {
+struct PlusButton_Previews: PreviewProvider {
     static var previews: some View {
-        PlusButtonView {}
+        PlusButton {}
             .previewLayout(.fixed(width: 50, height: 50))
     }
 }

@@ -12,11 +12,11 @@ class LoginViewModel: ObservableObject {
     
     @Published var email: InputField = InputField(placeholder: "Enter Email", text: "", validation: Validation.none)
     @Published var password: InputField = InputField(placeholder: "Enter Password", text: "", validation: Validation.none)
-    
+
     init() {}
     
-    func login() {
-        
+    func login(completion: @escaping () -> Void) {
+
         email.validation = getEmailValidationStatus()
         password.validation = getPasswordValidationStatus()
         
@@ -30,6 +30,9 @@ class LoginViewModel: ObservableObject {
                 return
             }
 
+            print("userId: ", userId)
+
+            completion()
         }
     }
     

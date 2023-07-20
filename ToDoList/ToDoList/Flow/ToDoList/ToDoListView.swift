@@ -24,10 +24,11 @@ struct ToDoListView: View {
             }
             .navigationTitle("To Do List")
             .toolbar {
-                PlusButtonView { viewModel.isNewItemViewPresented = true }
+                PlusButton { viewModel.isNewItemViewPresented = true }
             }
             .sheet(isPresented: $viewModel.isNewItemViewPresented) {
                 NewItemView(isNewItemViewPresented: $viewModel.isNewItemViewPresented)
+                    .presentationDetents([.fraction(0.25), .medium, .large])
             }
         }
 

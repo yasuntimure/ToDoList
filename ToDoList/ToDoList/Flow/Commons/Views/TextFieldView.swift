@@ -16,6 +16,7 @@ struct InputField {
 struct TextFieldView: View {
     
     @Binding var input: InputField
+    
     var isSecure: Bool
     
     var body: some View {

@@ -27,7 +27,7 @@ struct NewItemView: View {
                 DatePicker("Date", selection: $viewModel.date, displayedComponents: .date)
                     .datePickerStyle(.graphical)
 
-                PrimaryButtonView(title: "Save") {
+                PrimaryButton(title: "Save") {
 
                     if viewModel.canSave {
                         isNewItemViewPresented = false
