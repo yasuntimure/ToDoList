@@ -16,6 +16,12 @@ struct PlusButton: View {
     var body: some View {
         Button(action: action) {
             ZStack (alignment: .center) {
+                Circle()
+                    .stroke(lineWidth: size/5)
+                    .foregroundColor(.blue)
+                    .frame(width: size * 2,
+                           height: size * 2)
+
                 Rectangle()
                     .foregroundColor(.blue)
                     .frame(width: size/5,

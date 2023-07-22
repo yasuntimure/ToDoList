@@ -34,7 +34,6 @@
 		D0FF05ED2A5CE1E0005B1C5B /* NewItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05EC2A5CE1E0005B1C5B /* NewItemViewModel.swift */; };
 		D0FF05EF2A5CE1E8005B1C5B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05EE2A5CE1E8005B1C5B /* LoginViewModel.swift */; };
 		D0FF05F12A5CE1F2005B1C5B /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05F02A5CE1F2005B1C5B /* RegisterViewModel.swift */; };
-		D0FF05F32A5CE1FF005B1C5B /* ToDoLitsItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05F22A5CE1FF005B1C5B /* ToDoLitsItemViewModel.swift */; };
 		D0FF05F62A5DB63B005B1C5B /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05F52A5DB63B005B1C5B /* ScreenSize.swift */; };
 		D0FF05F82A5DBA7E005B1C5B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05F72A5DBA7E005B1C5B /* HeaderView.swift */; };
 		D0FF05FA2A5DBB09005B1C5B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05F92A5DBB09005B1C5B /* GradientView.swift */; };
@@ -69,7 +68,6 @@
 		D0FF05EC2A5CE1E0005B1C5B /* NewItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemViewModel.swift; sourceTree = "<group>"; };
 		D0FF05EE2A5CE1E8005B1C5B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		D0FF05F02A5CE1F2005B1C5B /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
-		D0FF05F22A5CE1FF005B1C5B /* ToDoLitsItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoLitsItemViewModel.swift; sourceTree = "<group>"; };
 		D0FF05F52A5DB63B005B1C5B /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		D0FF05F72A5DBA7E005B1C5B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		D0FF05F92A5DBB09005B1C5B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -115,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				D0FF05D72A5CE100005B1C5B /* ToDoListView.swift */,
+				D0FF05DF2A5CE133005B1C5B /* ToDoItemRow.swift */,
 				D0FF05EA2A5CE1D6005B1C5B /* ToDoListViewModel.swift */,
 			);
 			path = ToDoList;
@@ -136,15 +135,6 @@
 				D0FF05D92A5CE111005B1C5B /* NewItemView.swift */,
 			);
 			path = NewItem;
-			sourceTree = "<group>";
-		};
-		D06E92402A679DE60064137D /* ToDoListItem */ = {
-			isa = PBXGroup;
-			children = (
-				D0FF05DF2A5CE133005B1C5B /* ToDoItemRow.swift */,
-				D0FF05F22A5CE1FF005B1C5B /* ToDoLitsItemViewModel.swift */,
-			);
-			path = ToDoListItem;
 			sourceTree = "<group>";
 		};
 		D0FF059E2A5CC9BD005B1C5B = {
@@ -169,6 +159,7 @@
 				D06E922F2A64C8B00064137D /* Extensions */,
 				D0FF05F42A5DB63B005B1C5B /* Utils */,
 				D0FF05C72A5CDD1C005B1C5B /* App */,
+				D0FF05E12A5CE13B005B1C5B /* Model */,
 				D0FF05C82A5CDD33005B1C5B /* Flow */,
 				D0FF05C92A5CDD70005B1C5B /* Resources */,
 				D0FF05B02A5CC9BE005B1C5B /* Preview Content */,
@@ -196,14 +187,12 @@
 		D0FF05C82A5CDD33005B1C5B /* Flow */ = {
 			isa = PBXGroup;
 			children = (
-				D0FF06022A5F2883005B1C5B /* Commons */,
-				D0FF05E12A5CE13B005B1C5B /* Model */,
+				D0FF06022A5F2883005B1C5B /* Components */,
 				D06E92322A64CBA50064137D /* Main */,
 				D0FF05FC2A5DBB73005B1C5B /* Login */,
 				D0FF06082A5F3075005B1C5B /* Register */,
 				D06E923D2A679D8D0064137D /* ToDoList */,
 				D06E923E2A679DA70064137D /* Profile */,
-				D06E92402A679DE60064137D /* ToDoListItem */,
 				D06E923F2A679DD80064137D /* NewItem */,
 			);
 			path = Flow;
@@ -261,12 +250,12 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		D0FF06022A5F2883005B1C5B /* Commons */ = {
+		D0FF06022A5F2883005B1C5B /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				D0FF062B2A632871005B1C5B /* Views */,
 			);
-			path = Commons;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		D0FF06072A5F3044005B1C5B /* SubViews */ = {
@@ -409,7 +398,6 @@
 				D06E92442A685BB30064137D /* BindingExtension.swift in Sources */,
 				D0FF05FA2A5DBB09005B1C5B /* GradientView.swift in Sources */,
 				D0FF05ED2A5CE1E0005B1C5B /* NewItemViewModel.swift in Sources */,
-				D0FF05F32A5CE1FF005B1C5B /* ToDoLitsItemViewModel.swift in Sources */,
 				D0FF05DA2A5CE111005B1C5B /* NewItemView.swift in Sources */,
 				D0FF06042A5F2895005B1C5B /* PrimaryButton.swift in Sources */,
 				D06E92382A672D570064137D /* StatefulPreviewWrapper.swift in Sources */,

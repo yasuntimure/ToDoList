@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ToDoItemRow: View {
 
-    @Binding var item: TodoItem
+    @Binding var item: ToDoListItem
 
     var body: some View {
         HStack {
             ToggleButton(state: $item.isDone)
-                .frame(width: 70)
+                .frame(width: 40, height: 40)
 
             VStack (alignment: .leading, spacing: 5) {
                 Text(item.title)
@@ -27,24 +27,27 @@ struct ToDoItemRow: View {
                         .strikethrough(item.isDone)
                 }
             }
+            .padding(.leading, 5)
 
             Spacer()
         }
-        .padding(.horizontal)
+        .padding(.vertical, 5)
     }
 }
 
 struct ToDoItemRow_Previews: PreviewProvider {
 
-    static let todoItemWithoutDescription = TodoItem(
-        id: UUID(),
-        title: "Buy some bread 🥖"
+    static let todoItemWithoutDescription = ToDoListItem(
+        id: UUID().uuidString,
+        title: "Buy some bread 🥖",
+        date: Date().timeIntervalSince1970
     )
 
-    static let todoItemWithDescription = TodoItem(
-        id: UUID(),
+    static let todoItemWithDescription = ToDoListItem(
+        id: UUID().uuidString,
         title: "Buy some milk 🥛",
-        description: "Get a lactose free one"
+        description: "Get a lactose free one",
+        date: Date().timeIntervalSince1970
     )
 
     static var previews: some View {

@@ -27,7 +27,6 @@ struct ToggleButton: View {
                     CheckedCircle
                 }
             }
-            .padding()
         }
     }
 }
