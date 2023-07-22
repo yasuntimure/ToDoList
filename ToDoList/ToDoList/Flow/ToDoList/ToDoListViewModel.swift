@@ -13,16 +13,14 @@ class ToDoListViewModel: ObservableObject {
 
     @Published var isNewItemViewPresented = false
 
-    @Published var items: [ToDoListItem] = []
+    @Published var items: [ToDoListItemModel] = []
 
-    @Published var title: String = ""
-    @Published var description: String = ""
-    @Published var date: Date = Date()
+    @Published var newItem: ToDoListItem = ToDoListItem()
+
     @Published var showAlert: Bool = false
 
     var canSave: Bool {
-        !title.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !description.trimmingCharacters(in: .whitespaces).isEmpty
+        !newItem.title.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
     var userId: String = ""
@@ -45,7 +43,7 @@ class ToDoListViewModel: ObservableObject {
 
                 for document in documents {
                     let result = Result {
-                        try document.data(as: ToDoListItem.self)
+                        try document.data(as: ToDoListItemModel.self)
                     }
                     switch result {
                     case .success(let item):
@@ -81,7 +79,7 @@ class ToDoListViewModel: ObservableObject {
         items.move(fromOffsets: indexSet, toOffset: newIndex)
     }
 
-    func updateIsDoneStatus(of item: ToDoListItem) {
+    func updateIsDoneStatus(of item: ToDoListItemModel) {
 
         let newStatus = item.isDone
 
@@ -112,28 +110,26 @@ class ToDoListViewModel: ObservableObject {
         guard let uId = Auth.auth().currentUser?.uid else {
             return
         }
-        // Create model
-        let newId = UUID().uuidString
-        let newItem = ToDoListItem(id: newId,
-                                   title: title,
-                                   description: description,
-                                   date: date.timeIntervalSince1970,
-                                   isDone: false)
+
+        let item = newItem.getStructModel()
 
         // Save model
         let db = Firestore.firestore()
         db.collection ("users")
             .document (uId)
             .collection("todos")
-            .document (newId)
-            .setData(newItem.asDictionary())
+            .document (item.id)
+            .setData(item.asDictionary())
 
-        title = ""
-        description = ""
-        date = Date()
-        showAlert = false
+        newItem.reset()
+
+        fetchItems(id: userId)
 
     }
+
+    
+
+
 
 
 }

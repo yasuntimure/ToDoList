@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ToDoItemRow: View {
 
-    @Binding var item: ToDoListItem
+    @Binding var item: ToDoListItemModel
 
     var body: some View {
         HStack {
@@ -21,11 +21,14 @@ struct ToDoItemRow: View {
                     .font(.headline)
                     .strikethrough(item.isDone)
 
-                if let description = item.description {
-                    Text(description)
+
+                if !item.description.isEmpty {
+                    Text(item.description)
                         .font(.body)
                         .strikethrough(item.isDone)
+                        .multilineTextAlignment(.leading)
                 }
+
             }
             .padding(.leading, 5)
 
@@ -37,13 +40,7 @@ struct ToDoItemRow: View {
 
 struct ToDoItemRow_Previews: PreviewProvider {
 
-    static let todoItemWithoutDescription = ToDoListItem(
-        id: UUID().uuidString,
-        title: "Buy some bread 🥖",
-        date: Date().timeIntervalSince1970
-    )
-
-    static let todoItemWithDescription = ToDoListItem(
+    static let todoItemWithDescription = ToDoListItemModel(
         id: UUID().uuidString,
         title: "Buy some milk 🥛",
         description: "Get a lactose free one",
@@ -52,10 +49,6 @@ struct ToDoItemRow_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            Stateful(value: todoItemWithoutDescription) { todoItem in
-                ToDoItemRow(item: todoItem)
-            }
-                .previewDisplayName("Without Description")
 
             Stateful(value: todoItemWithDescription) { todoItem in
                 ToDoItemRow(item: todoItem)

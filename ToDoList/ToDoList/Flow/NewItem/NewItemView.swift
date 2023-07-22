@@ -24,18 +24,18 @@ struct NewItemView: View {
                     .padding(.top, 10)
                     .shadow(radius: 12)
 
-                TextField("Title", text: $viewModel.title)
+                TextField("Title", text: $viewModel.newItem.title)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .frame(height: 50)
 
-                TextField("Description", text: $viewModel.description)
+                TextField("Description", text: $viewModel.newItem.description)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .frame(minHeight: 80, maxHeight: 500)
 
 
-                DatePicker("Date", selection: $viewModel.date, displayedComponents: [.date, .hourAndMinute])
+                DatePicker("Date", selection: $viewModel.newItem.date, displayedComponents: [.date, .hourAndMinute])
                     .datePickerStyle(.graphical)
                     .frame(height: ScreenSize.width)
 
@@ -60,5 +60,6 @@ struct NewItemView: View {
 struct NewItemView_Previews: PreviewProvider {
     static var previews: some View {
         NewItemView()
+            .environmentObject(ToDoListViewModel())
     }
 }
