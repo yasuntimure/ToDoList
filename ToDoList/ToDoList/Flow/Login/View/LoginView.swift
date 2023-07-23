@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
-    
-    @StateObject var viewModel = LoginViewModel()
 
-    @Binding var userLoggedIn: Bool
+    @StateObject var viewModel = LoginViewModel()
+    @EnvironmentObject var user: UserInfo
 
     var body: some View {
     
@@ -33,7 +32,7 @@ struct LoginView: View {
 
                 PrimaryButton(title: "Login") {
                     viewModel.login {
-                        userLoggedIn = true
+                        user.loggedIn = true
                     }
                 }
 
@@ -41,19 +40,24 @@ struct LoginView: View {
                 
                 VStack (spacing: 5) {
                     Text("New around here?")
-                    NavigationLink(destination: RegisterView()) {
-                        Text("Create An Account")
+                    Button("Create An Account") {
+                        viewModel.isRegisterPresented = true
                     }
                 }
                 .padding(.bottom, 100)
                 
             }
+            .sheet(isPresented: $viewModel.isRegisterPresented) {
+                RegisterView()
+                    .presentationDetents([.large])
+            }
+
         }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(userLoggedIn: .constant(false))
+        LoginView()
     }
 }

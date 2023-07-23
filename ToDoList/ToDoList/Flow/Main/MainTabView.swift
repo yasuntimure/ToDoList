@@ -9,23 +9,17 @@ import SwiftUI
 
 struct MainTabView: View {
 
-
-    @StateObject var viewModel = MainTabViewModel()
-
-    @State var userLoggedIn: Bool = false {
-        didSet {
-            userLoggedIn = viewModel.isSigned && !viewModel.currentUserId.isEmpty
-        }
-    }
+    @StateObject var user: UserInfo = UserInfo()
 
     var body: some View {
         NavigationView {
-            if userLoggedIn {
+            if user.loggedIn {
                 AccountView
             } else {
-                LoginView(userLoggedIn: $userLoggedIn)
+                LoginView()
             }
         }
+        .environmentObject(user)
     }
 }
 
@@ -35,7 +29,7 @@ extension MainTabView {
 
     var AccountView: some View {
         TabView {
-            ToDoListView(userId: viewModel.currentUserId)
+            ToDoListView()
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }

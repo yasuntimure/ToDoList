@@ -28,6 +28,7 @@ class ToDoListViewModel: ObservableObject {
     func fetchItems(id: String) {
         items = []
         userId = id
+
         let db = Firestore.firestore()
         db.collection("users").document(userId).collection("todos").getDocuments { (querySnapshot, err) in
             if let err = err {

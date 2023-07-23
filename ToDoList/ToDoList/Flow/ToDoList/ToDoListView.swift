@@ -9,13 +9,9 @@ import SwiftUI
 
 struct ToDoListView: View {
 
+    @EnvironmentObject var user: UserInfo
+
     @StateObject var viewModel = ToDoListViewModel()
-
-    private let userId: String
-
-    init(userId: String) {
-        self.userId = userId
-    }
 
     var body: some View {
         NavigationView {
@@ -32,10 +28,10 @@ struct ToDoListView: View {
                     .onMove(perform: viewModel.moveItems(from:to:))
                 }
                 .onAppear {
-                    viewModel.fetchItems(id: userId)
+                    viewModel.fetchItems(id: user.currentId)
                 }
                 .refreshable {
-                    viewModel.fetchItems(id: userId)
+                    viewModel.fetchItems(id: user.currentId)
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
@@ -70,6 +66,6 @@ struct ToDoListView: View {
 
 struct ToDoListView_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoListView(userId: "E3aIHW8gKAcoJWWsK8It31rGsrM2")
+        ToDoListView()
     }
 }

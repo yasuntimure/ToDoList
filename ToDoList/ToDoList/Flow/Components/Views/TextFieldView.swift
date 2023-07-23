@@ -7,18 +7,29 @@
 
 import SwiftUI
 
-struct InputField {
-    var placeholder: String
-    var text: String
-    var validation: Validation
+class InputField: ObservableObject, Equatable {
+
+    @Published var placeholder: String = ""
+    @Published var text: String = ""
+    @Published var validation: Validation = .none
+
+    init(placeholder: String = "", text: String = "", validation: Validation = .none) {
+        self.placeholder = placeholder
+        self.text = text
+        self.validation = validation
+    }
+
+    static func == (lhs: InputField, rhs: InputField) -> Bool {
+        lhs.placeholder == rhs.placeholder
+    }
 }
 
 struct TextFieldView: View {
     
     @Binding var input: InputField
     
-    var isSecure: Bool
-    
+    var isSecure: Bool = false
+
     var body: some View {
         
         VStack (alignment: .leading, spacing: 5) {

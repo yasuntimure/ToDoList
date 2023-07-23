@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D06E92312A64C8CF0064137D /* EncodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E92302A64C8CF0064137D /* EncodableExtension.swift */; };
-		D06E92342A64CBCA0064137D /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E92332A64CBC90064137D /* MainTabViewModel.swift */; };
+		D06E92342A64CBCA0064137D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E92332A64CBC90064137D /* UserInfo.swift */; };
 		D06E92362A672CA60064137D /* AlignmentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E92352A672CA60064137D /* AlignmentExtension.swift */; };
 		D06E92382A672D570064137D /* StatefulPreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E92372A672D570064137D /* StatefulPreviewWrapper.swift */; };
 		D06E923C2A673B8C0064137D /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E923B2A673B8C0064137D /* PlusButton.swift */; };
@@ -43,7 +43,7 @@
 
 /* Begin PBXFileReference section */
 		D06E92302A64C8CF0064137D /* EncodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtension.swift; sourceTree = "<group>"; };
-		D06E92332A64CBC90064137D /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
+		D06E92332A64CBC90064137D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		D06E92352A672CA60064137D /* AlignmentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignmentExtension.swift; sourceTree = "<group>"; };
 		D06E92372A672D570064137D /* StatefulPreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulPreviewWrapper.swift; sourceTree = "<group>"; };
 		D06E923B2A673B8C0064137D /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				D0FF05AC2A5CC9BD005B1C5B /* MainTabView.swift */,
-				D06E92332A64CBC90064137D /* MainTabViewModel.swift */,
+				D06E92332A64CBC90064137D /* UserInfo.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -411,7 +411,7 @@
 				D0FF05E32A5CE160005B1C5B /* User.swift in Sources */,
 				D0FF060C2A5F3103005B1C5B /* RegisterView.swift in Sources */,
 				D06E923C2A673B8C0064137D /* PlusButton.swift in Sources */,
-				D06E92342A64CBCA0064137D /* MainTabViewModel.swift in Sources */,
+				D06E92342A64CBCA0064137D /* UserInfo.swift in Sources */,
 				D0FF05D82A5CE100005B1C5B /* ToDoListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
