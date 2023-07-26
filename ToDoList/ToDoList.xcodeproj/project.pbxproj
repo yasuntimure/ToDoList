@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D00AA1112A6DF8640021E06D /* ProfileImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00AA1102A6DF8640021E06D /* ProfileImageButton.swift */; };
+		D00AA1112A6DF8640021E06D /* ProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00AA1102A6DF8640021E06D /* ProfileImagePicker.swift */; };
+		D00AA1132A6DFEFB0021E06D /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00AA1122A6DFEFB0021E06D /* SecondaryButton.swift */; };
 		D06E92312A64C8CF0064137D /* EncodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E92302A64C8CF0064137D /* EncodableExtension.swift */; };
 		D06E92342A64CBCA0064137D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E92332A64CBC90064137D /* UserInfo.swift */; };
 		D06E92362A672CA60064137D /* AlignmentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E92352A672CA60064137D /* AlignmentExtension.swift */; };
@@ -43,7 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D00AA1102A6DF8640021E06D /* ProfileImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButton.swift; sourceTree = "<group>"; };
+		D00AA1102A6DF8640021E06D /* ProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePicker.swift; sourceTree = "<group>"; };
+		D00AA1122A6DFEFB0021E06D /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		D06E92302A64C8CF0064137D /* EncodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtension.swift; sourceTree = "<group>"; };
 		D06E92332A64CBC90064137D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		D06E92352A672CA60064137D /* AlignmentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignmentExtension.swift; sourceTree = "<group>"; };
@@ -93,7 +95,7 @@
 		D00AA10F2A6DF8530021E06D /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				D00AA1102A6DF8640021E06D /* ProfileImageButton.swift */,
+				D00AA1102A6DF8640021E06D /* ProfileImagePicker.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -310,6 +312,7 @@
 		D0FF062B2A632871005B1C5B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D00AA1122A6DFEFB0021E06D /* SecondaryButton.swift */,
 				D0FF062C2A6329B1005B1C5B /* TextFieldView.swift */,
 				D0FF05F72A5DBA7E005B1C5B /* HeaderView.swift */,
 				D0FF06032A5F2895005B1C5B /* PrimaryButton.swift */,
@@ -421,7 +424,8 @@
 				D06E92362A672CA60064137D /* AlignmentExtension.swift in Sources */,
 				D0FF05E32A5CE160005B1C5B /* User.swift in Sources */,
 				D0FF060C2A5F3103005B1C5B /* RegisterView.swift in Sources */,
-				D00AA1112A6DF8640021E06D /* ProfileImageButton.swift in Sources */,
+				D00AA1112A6DF8640021E06D /* ProfileImagePicker.swift in Sources */,
+				D00AA1132A6DFEFB0021E06D /* SecondaryButton.swift in Sources */,
 				D06E923C2A673B8C0064137D /* PlusButton.swift in Sources */,
 				D06E92342A64CBCA0064137D /* UserInfo.swift in Sources */,
 				D0FF05D82A5CE100005B1C5B /* ToDoListView.swift in Sources */,
