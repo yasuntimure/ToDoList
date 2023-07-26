@@ -18,6 +18,10 @@ class MainViewModel: ObservableObject {
     @Published var newItem: ToDoListItem = ToDoListItem()
 
     @Published var showAlert: Bool = false
+    @Published var errorMessage: String = ""
+
+    @Published var userName: String = "Eyup Yasuntimur"
+    @Published var joinDate: String = "22.07.2023"
 
     var canSave: Bool {
         !newItem.title.trimmingCharacters(in: .whitespaces).isEmpty
@@ -128,9 +132,13 @@ class MainViewModel: ObservableObject {
 
     }
 
-    
-
-
-
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            showAlert = true
+            errorMessage = signOutError.description
+        }
+    }
 
 }

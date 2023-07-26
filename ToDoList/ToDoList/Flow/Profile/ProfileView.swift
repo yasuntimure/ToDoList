@@ -10,7 +10,7 @@ import PhotosUI
 
 struct ProfileView: View {
 
-    @StateObject var viewModel = ProfileViewModel()
+    @EnvironmentObject var viewModel: MainViewModel
 
     var body: some View {
         NavigationView {

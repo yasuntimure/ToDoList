@@ -32,7 +32,6 @@
 		D0FF05E02A5CE133005B1C5B /* ToDoItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05DF2A5CE133005B1C5B /* ToDoItemRow.swift */; };
 		D0FF05E32A5CE160005B1C5B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05E22A5CE160005B1C5B /* User.swift */; };
 		D0FF05E52A5CE170005B1C5B /* ToDoListItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05E42A5CE170005B1C5B /* ToDoListItemModel.swift */; };
-		D0FF05E92A5CE1C8005B1C5B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05E82A5CE1C8005B1C5B /* ProfileViewModel.swift */; };
 		D0FF05EB2A5CE1D6005B1C5B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05EA2A5CE1D6005B1C5B /* MainViewModel.swift */; };
 		D0FF05EF2A5CE1E8005B1C5B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05EE2A5CE1E8005B1C5B /* LoginViewModel.swift */; };
 		D0FF05F12A5CE1F2005B1C5B /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF05F02A5CE1F2005B1C5B /* RegisterViewModel.swift */; };
@@ -68,7 +67,6 @@
 		D0FF05DF2A5CE133005B1C5B /* ToDoItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemRow.swift; sourceTree = "<group>"; };
 		D0FF05E22A5CE160005B1C5B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D0FF05E42A5CE170005B1C5B /* ToDoListItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListItemModel.swift; sourceTree = "<group>"; };
-		D0FF05E82A5CE1C8005B1C5B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		D0FF05EA2A5CE1D6005B1C5B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D0FF05EE2A5CE1E8005B1C5B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		D0FF05F02A5CE1F2005B1C5B /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
@@ -136,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				D0FF05D32A5CE0ED005B1C5B /* ProfileView.swift */,
-				D0FF05E82A5CE1C8005B1C5B /* ProfileViewModel.swift */,
 				D00AA10F2A6DF8530021E06D /* SubViews */,
 			);
 			path = Profile;
@@ -424,7 +421,6 @@
 				D0FF05F12A5CE1F2005B1C5B /* RegisterViewModel.swift in Sources */,
 				D0FF05AB2A5CC9BD005B1C5B /* ToDoListApp.swift in Sources */,
 				D0FF05E02A5CE133005B1C5B /* ToDoItemRow.swift in Sources */,
-				D0FF05E92A5CE1C8005B1C5B /* ProfileViewModel.swift in Sources */,
 				D06E92362A672CA60064137D /* AlignmentExtension.swift in Sources */,
 				D0FF05E32A5CE160005B1C5B /* User.swift in Sources */,
 				D0FF060C2A5F3103005B1C5B /* RegisterView.swift in Sources */,

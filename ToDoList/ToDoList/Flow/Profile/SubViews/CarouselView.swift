@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct CarouselView: View {
+
+    @EnvironmentObject var viewModel: MainViewModel
+
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
-                ForEach(0..<10) { item in
-                    CarouselItem()
+                ForEach(viewModel.items) { item in
+                    CarouselItem(item: item)
                         .frame(width: ScreenSize.width-150, height: 200)
                         .shadow(radius: 3)
                 }
@@ -26,15 +29,17 @@ struct CarouselItem: View {
 
     @State var progressPercent: Float = 0.2
 
+    @State var item: ToDoListItemModel
+
     var body: some View {
 
         ZStack {
             GradientView(mColor: .secondary)
 
             VStack (alignment: .leading) {
-                Text("Title")
+                Text(item.title)
                     .font(.headline)
-                Text("Description")
+                Text(item.description)
                     .font(.body)
                 ProgressBar(value: $progressPercent)
                     .frame(width: ScreenSize.width/3, height: 10)
@@ -65,7 +70,8 @@ struct ProgressBar: View {
                     .foregroundColor(Color(UIColor.systemTeal))
 
             }
-        }.cornerRadius(45.0)
+        }
+        .cornerRadius(45.0)
     }
 }
 
