@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 
-class ToDoListViewModel: ObservableObject {
+class MainViewModel: ObservableObject {
 
     @Published var isNewItemViewPresented = false
 

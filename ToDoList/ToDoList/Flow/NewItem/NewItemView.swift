@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewItemView: View {
 
-    @EnvironmentObject var viewModel: ToDoListViewModel
+    @EnvironmentObject var viewModel: MainViewModel
 
     @Environment(\.dismiss) var dismiss
 
@@ -60,6 +60,6 @@ struct NewItemView: View {
 struct NewItemView_Previews: PreviewProvider {
     static var previews: some View {
         NewItemView()
-            .environmentObject(ToDoListViewModel())
+            .environmentObject(MainViewModel())
     }
 }

@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct MainTabView: View {
+struct MainView: View {
 
     @StateObject var user: UserInfo = UserInfo()
+
+    @StateObject var viewModel = MainViewModel()
 
     var body: some View {
         NavigationView {
@@ -25,7 +27,7 @@ struct MainTabView: View {
 
 // MARK: - Account TabView
 
-extension MainTabView {
+extension MainView {
 
     var AccountView: some View {
         TabView {
@@ -38,6 +40,7 @@ extension MainTabView {
                     Label("Profile", systemImage: "person.circle")
                 }
         }
+        .environmentObject(viewModel)
     }
 
 }
@@ -47,6 +50,6 @@ extension MainTabView {
 
 struct MainViewView_Previews: PreviewProvider {
     static var previews: some View {
-        MainTabView()
+        MainView()
     }
 }

@@ -10,8 +10,7 @@ import SwiftUI
 struct ToDoListView: View {
 
     @EnvironmentObject var user: UserInfo
-
-    @StateObject var viewModel = ToDoListViewModel()
+    @EnvironmentObject var viewModel: MainViewModel
 
     var body: some View {
         NavigationView {

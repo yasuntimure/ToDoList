@@ -16,9 +16,9 @@ struct ProfileView: View {
         NavigationView {
             VStack {
                 HStack {
-
                     ProfileImagePicker()
                         .padding([.leading, .top], 20)
+
 
                     VStack (alignment: .trailing, spacing: 2) {
                         VStack (alignment: .leading, spacing: 5) {
@@ -44,6 +44,11 @@ struct ProfileView: View {
 
                     Spacer()
                 }
+                .padding(.top)
+
+                CarouselView()
+                    .padding(.top, 50)
+
                 Spacer()
             }
             .alert(isPresented: $viewModel.showAlert) {
