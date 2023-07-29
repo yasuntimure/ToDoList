@@ -21,14 +21,12 @@ struct LoginView: View {
             VStack {
                 
                 HeaderView()
-                
 
                 VStack (spacing: 10) {
                     TextFieldView(input: $viewModel.email, isSecure: false)
                     TextFieldView(input: $viewModel.password, isSecure: true)
                 }
                 .padding(.top, ScreenSize.width/6)
-                
 
                 PrimaryButton(title: "Login") {
                     viewModel.login { user.loggedIn = true }

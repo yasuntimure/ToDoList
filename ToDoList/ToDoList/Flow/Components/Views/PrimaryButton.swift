@@ -8,28 +8,44 @@
 import SwiftUI
 
 struct PrimaryButton: View {
+
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     @State var title: String
     @State var width: CGFloat = ScreenSize.width - 100
-    @State var height: CGFloat = ScreenSize.width/6
+    @State var height: CGFloat = ScreenSize.width/7
     @State var action: () -> Void
 
     
     var body: some View {
         Button(action: action) {
-            ZStack (alignment: .center) {
-                RoundedRectangle(cornerRadius: 0)
-                    .foregroundColor(.blue)
-                
-                Text(title)
-                    .foregroundColor(.white)
-                    .bold()
-            }
-            .padding(.top)
-            .frame(width: width,
-                   height: height)
+
+            Text(title)
+                .foregroundColor(colorScheme == .light ? .black : .white)
+                .font(.system(size: 20))
+                .bold()
+                .frame(width: width,
+                       height: height)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color.primary, lineWidth: 2)
+                )
+
         }
+        .padding(.top)
+
     }
 
 }
 
+struct PrimaryButton_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.blue
+
+            PrimaryButton(title: "Login") {
+                // action
+            }
+        }
+    }
+}

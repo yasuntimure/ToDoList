@@ -25,9 +25,11 @@ class InputField: ObservableObject, Equatable {
 }
 
 struct TextFieldView: View {
+
+    @Environment (\.colorScheme) var colorScheme: ColorScheme
     
     @Binding var input: InputField
-    
+
     var isSecure: Bool = false
 
     var body: some View {
@@ -37,19 +39,29 @@ struct TextFieldView: View {
                 .font(.system(size: 14))
                 .foregroundColor(input.validation.status() == .approved ? .green : .red)
                 .bold()
-            
-            if isSecure {
-                SecureField(input.placeholder, text: $input.text)
-                    .padding(12)
-                    .border(Color.blue, width: 1)
-            
-            } else {
-                TextField(input.placeholder, text: $input.text)
-                    .padding(12)
-                    .border(Color.blue, width: 1)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-            }
+
+                if isSecure {
+                    SecureField(input.placeholder, text: $input.text)
+                        .padding(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color.primary, lineWidth: 2)
+                        )
+
+
+
+                } else {
+                    TextField(input.placeholder, text: $input.text)
+                        .padding(12)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .background(colorScheme == .light ? .white : .black)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color.primary, lineWidth: 2)
+                        )
+                }
+
         }
             .padding(.horizontal)
     }
