@@ -132,13 +132,15 @@ class MainViewModel: ObservableObject {
 
     }
 
-    func logout() {
+    func logout(completion: @escaping () -> Void) {
         do {
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
             showAlert = true
             errorMessage = signOutError.description
         }
+
+        completion()
     }
 
 }

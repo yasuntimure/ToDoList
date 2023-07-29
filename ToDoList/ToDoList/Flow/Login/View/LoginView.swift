@@ -13,7 +13,7 @@ struct LoginView: View {
     @EnvironmentObject var user: UserInfo
 
     var body: some View {
-    
+
         ZStack {
             
             GradientView()
@@ -31,11 +31,8 @@ struct LoginView: View {
                 
 
                 PrimaryButton(title: "Login") {
-                    viewModel.login {
-                        user.loggedIn = true
-                    }
+                    viewModel.login { user.loggedIn = true }
                 }
-
                 .padding(.bottom, ScreenSize.width/8)
                 
                 VStack (spacing: 5) {
