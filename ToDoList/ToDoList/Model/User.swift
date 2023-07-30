@@ -5,7 +5,7 @@
 //  Created by Eyüp on 2023-07-10.
 //
 
-import Foundation
+import SwiftUI
 
 struct User: Codable {
     let id: String

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PlusButton: View {
 
+    @Environment (\.colorScheme) var color: ColorScheme
+
     var size: CGFloat = 20
 
     @State var action: () -> Void
@@ -18,20 +20,24 @@ struct PlusButton: View {
             ZStack (alignment: .center) {
                 Circle()
                     .stroke(lineWidth: size/5)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.primary)
                     .frame(width: size * 2,
                            height: size * 2)
+                Circle()
+                    .foregroundColor(color == .light ? .white : .black)
+                    .frame(width: size * 1.9,
+                           height: size * 1.9)
 
                 Rectangle()
-                    .foregroundColor(.blue)
-                    .frame(width: size/5,
+                    .foregroundColor(.primary)
+                    .frame(width: size/6,
                            height: size)
                     .cornerRadius(5)
 
                 Rectangle()
-                    .foregroundColor(.blue)
+                    .foregroundColor(.primary)
                     .frame(width: size,
-                           height: size/5)
+                           height: size/6)
                     .cornerRadius(5)
             }
         }

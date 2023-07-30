@@ -9,15 +9,23 @@ import SwiftUI
 
 struct ToDoListView: View {
 
-    @EnvironmentObject var user: UserInfo
-    @EnvironmentObject var viewModel: MainViewModel
+    @ObservedObject var viewModel: ToDoListViewModel
+
+    init(viewModel: ToDoListViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
-        NavigationView {
             ZStack {
+
+                if viewModel.isLoading {
+                    LoadingView()
+                        .frame(width: 50, height: 50, alignment: .center)
+                }
+
                 List {
                     ForEach ($viewModel.items) { $todoItem in
-                        ToDoItemRow(item: $todoItem.onNewValue {
+                        ToDoListItemRow(item: $todoItem.onNewValue {
                             withAnimation {
                                 viewModel.updateIsDoneStatus(of: todoItem)
                             }
@@ -27,44 +35,51 @@ struct ToDoListView: View {
                     .onMove(perform: viewModel.moveItems(from:to:))
                 }
                 .onAppear {
-                    viewModel.fetchItems(id: user.currentId)
+                    viewModel.fetchItems()
                 }
                 .refreshable {
-                    viewModel.fetchItems(id: user.currentId)
+                    viewModel.fetchItems()
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
                 }
 
                 .listStyle(.plain)
-                .navigationTitle("To Do List")
+                .navigationTitle(viewModel.list.title)
 
-                .sheet(isPresented: $viewModel.isNewItemViewPresented) {
+                .sheet(isPresented: $viewModel.newItemViewPresented) {
                     NewItemView()
                         .presentationDetents([.large])
+                        .environmentObject(viewModel)
                 }
 
-                VStack {
-                    Spacer()
-
-                    PlusButton (size: 25) {
-                        viewModel.isNewItemViewPresented = true
-                    }
-                    .padding(.bottom)
-                }
-
-
-
-            }
-
+                plusButton
         }
-        .environmentObject(viewModel)
     }
 
 }
 
+// MARK: - Plus Button
+
+extension ToDoListView {
+
+    var plusButton: some View {
+        VStack (alignment: .trailing) {
+            Spacer()
+            HStack {
+                Spacer()
+                PlusButton(size: 25) {
+                    viewModel.newItemViewPresented = true
+                }
+                .padding([.trailing, .bottom], 30)
+            }
+            .padding(.bottom)
+        }
+    }
+}
+
 struct ToDoListView_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoListView()
+        ToDoListView(viewModel: ToDoListViewModel(userId: "", list: ToDoListModel(id: "", title: "", description: "", items: [], date: Date().timeIntervalSince1970)))
     }
 }

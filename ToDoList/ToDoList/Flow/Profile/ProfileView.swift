@@ -11,7 +11,6 @@ import PhotosUI
 struct ProfileView: View {
 
     @EnvironmentObject var viewModel: MainViewModel
-    @EnvironmentObject var user: UserInfo
 
     var body: some View {
         NavigationView {
@@ -40,8 +39,7 @@ struct ProfileView: View {
                         SecondaryButton(title: "Logout") {
                             viewModel.logout {
                                 withAnimation {
-                                    user.currentId = ""
-                                    user.loggedIn = false
+                                    viewModel.userId = ""
                                 }
                             }
                         }

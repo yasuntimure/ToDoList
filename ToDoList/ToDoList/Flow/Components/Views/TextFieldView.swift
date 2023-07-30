@@ -42,20 +42,18 @@ struct TextFieldView: View {
 
                 if isSecure {
                     SecureField(input.placeholder, text: $input.text)
-                        .padding(12)
+                        .frame(height: ScreenSize.defaultHeight)
+                        .padding(.horizontal)
                         .overlay(
                             RoundedRectangle(cornerRadius: 15)
                                 .stroke(Color.primary, lineWidth: 2)
                         )
-
-
-
                 } else {
                     TextField(input.placeholder, text: $input.text)
-                        .padding(12)
+                        .frame(height: ScreenSize.defaultHeight)
+                        .padding(.horizontal)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
-                        .background(colorScheme == .light ? .white : .black)
                         .overlay(
                             RoundedRectangle(cornerRadius: 15)
                                 .stroke(Color.primary, lineWidth: 2)
@@ -63,7 +61,7 @@ struct TextFieldView: View {
                 }
 
         }
-            .padding(.horizontal)
+
     }
 
 }

@@ -34,19 +34,11 @@ public struct ScreenSize {
         min(ScreenSize.width, ScreenSize.height)
     }
 
-    public static var safeAreaInsets: UIEdgeInsets {
-        UIScreen.main.focusedView?.layoutMarginsGuide.owningView?.safeAreaInsets ?? UIEdgeInsets.zero
+    public static var defaultWidth: CGFloat {
+        ScreenSize.width - 50
     }
 
-    public static var safeAreaLayoutGuide: UILayoutGuide {
-        UIScreen.main.focusedView?.layoutMarginsGuide.owningView?.safeAreaLayoutGuide ?? UILayoutGuide()
-    }
-
-    public static var safeAreaBounds: CGRect {
-        let safeAreaLayout = ScreenSize.safeAreaLayoutGuide.layoutFrame
-        return CGRect(x: safeAreaLayout.minX,
-                      y: safeAreaLayout.minY,
-                      width: safeAreaLayout.width,
-                      height: safeAreaLayout.height)
+    public static var defaultHeight: CGFloat {
+        50
     }
 }

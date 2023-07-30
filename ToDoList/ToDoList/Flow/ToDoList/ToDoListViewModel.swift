@@ -2,16 +2,16 @@
 //  ToDoListViewModel.swift
 //  ToDoList
 //
-//  Created by Eyüp on 2023-07-10.
+//  Created by Eyüp on 2023-07-29.
 //
 
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 
-class MainViewModel: ObservableObject {
+class ToDoListViewModel: ObservableObject {
 
-    @Published var isNewItemViewPresented = false
+    @Published var newItemViewPresented = false
 
     @Published var items: [ToDoListItemModel] = []
 
@@ -20,21 +20,35 @@ class MainViewModel: ObservableObject {
     @Published var showAlert: Bool = false
     @Published var errorMessage: String = ""
 
-    @Published var userName: String = "Eyup Yasuntimur"
-    @Published var joinDate: String = "22.07.2023"
+    @Published var isLoading: Bool = false
 
     var canSave: Bool {
         !newItem.title.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
-    var userId: String = ""
+    @Published var userId: String
+    @Published var list: ToDoListModel
 
-    func fetchItems(id: String) {
+
+    init(userId: String, list: ToDoListModel) {
+        self.userId = userId
+        self.list = list
+    }
+
+
+    func fetchItems() {
+
+        isLoading = true
+
         items = []
-        userId = id
 
-        let db = Firestore.firestore()
-        db.collection("users").document(userId).collection("todos").getDocuments { (querySnapshot, err) in
+        Firestore.firestore()
+            .collection("users")
+            .document(userId)
+            .collection("notes")
+            .document(list.id)
+            .collection("todos")
+            .getDocuments { [weak self] (querySnapshot, err) in
             if let err = err {
 
                 print("Error getting documents: \(err)")
@@ -52,14 +66,17 @@ class MainViewModel: ObservableObject {
                     }
                     switch result {
                     case .success(let item):
-                        self.items.append(item)
+                        self?.items.append(item)
                     case .failure(let error):
                         print("Error decoding item: \(error)")
                     }
                 }
-                self.reorder()
+                self?.reorder()
+                self?.isLoading = false
             }
         }
+
+
     }
 
     func reorder() {
@@ -67,15 +84,21 @@ class MainViewModel: ObservableObject {
     }
 
     func deleteItems(at indexSet: IndexSet) {
-        let db = Firestore.firestore()
         indexSet.forEach { index in
-            db.collection("users").document(self.userId).collection("todos").document(items[index].id).delete { err in
-                if let err = err {
-                    print("Error removing document: \(err)")
-                } else {
-                    print("Document successfully removed!")
+            Firestore.firestore()
+                .collection("users")
+                .document(userId)
+                .collection("notes")
+                .document(list.id)
+                .collection("todos")
+                .document(items[index].id)
+                .delete { err in
+                    if let err = err {
+                        print("Error removing document: \(err)")
+                    } else {
+                        print("Document successfully removed!")
+                    }
                 }
-            }
         }
         items.remove(atOffsets: indexSet)
     }
@@ -91,6 +114,8 @@ class MainViewModel: ObservableObject {
         Firestore.firestore()
             .collection("users")
             .document(userId)
+            .collection("notes")
+            .document(list.id)
             .collection("todos")
             .document(item.id)
             .updateData(["isDone": newStatus]) { err in
@@ -108,39 +133,26 @@ class MainViewModel: ObservableObject {
 
         self.reorder()
     }
-
+    
 
     func save() {
-
-        guard let uId = Auth.auth().currentUser?.uid else {
-            return
-        }
 
         let item = newItem.getStructModel()
 
         // Save model
-        let db = Firestore.firestore()
-        db.collection ("users")
-            .document (uId)
+        Firestore.firestore()
+            .collection ("users")
+            .document(userId)
+            .collection("notes")
+            .document(list.id)
             .collection("todos")
             .document (item.id)
             .setData(item.asDictionary())
 
         newItem.reset()
 
-        fetchItems(id: userId)
+        fetchItems()
 
-    }
-
-    func logout(completion: @escaping () -> Void) {
-        do {
-            try Auth.auth().signOut()
-        } catch let signOutError as NSError {
-            showAlert = true
-            errorMessage = signOutError.description
-        }
-
-        completion()
     }
 
 }

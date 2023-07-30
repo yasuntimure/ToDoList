@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ToDoItemRow: View {
+struct ToDoListItemRow: View {
 
     @Binding var item: ToDoListItemModel
 
@@ -51,7 +51,7 @@ struct ToDoItemRow_Previews: PreviewProvider {
         Group {
 
             Stateful(value: todoItemWithDescription) { todoItem in
-                ToDoItemRow(item: todoItem)
+                ToDoListItemRow(item: todoItem)
             }
             .previewDisplayName("With Description")
         }

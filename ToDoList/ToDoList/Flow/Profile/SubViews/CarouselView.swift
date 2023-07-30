@@ -14,8 +14,8 @@ struct CarouselView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
-                ForEach(viewModel.items) { item in
-                    CarouselItem(item: item)
+                ForEach(viewModel.lists) { list in
+                    Carousel(list: list)
                         .frame(width: ScreenSize.width-150, height: 200)
                         .shadow(radius: 3)
                 }
@@ -25,11 +25,11 @@ struct CarouselView: View {
     }
 }
 
-struct CarouselItem: View {
+struct Carousel: View {
 
     @State var progressPercent: Float = 0.2
 
-    @State var item: ToDoListItemModel
+    @State var list: ToDoListModel
 
     var body: some View {
 
@@ -37,9 +37,9 @@ struct CarouselItem: View {
             GradientView(mColor: .secondary)
 
             VStack (alignment: .leading) {
-                Text(item.title)
+                Text(list.title)
                     .font(.headline)
-                Text(item.description)
+                Text(list.description)
                     .font(.body)
                 ProgressBar(value: $progressPercent)
                     .frame(width: ScreenSize.width/3, height: 10)

@@ -13,11 +13,10 @@ struct GradientView: View {
 
     var body: some View {
         LinearGradient(
-            gradient: Gradient(colors: [mColor.opacity(0.3), mColor.opacity(0.1)]),
+            gradient: Gradient(colors: [mColor.opacity(0.15), mColor.opacity(0.0)]),
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
-        .grayscale(0.2)
         .edgesIgnoringSafeArea(.all)
     }
 }

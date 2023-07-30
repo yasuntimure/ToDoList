@@ -9,19 +9,19 @@ import SwiftUI
 
 struct MainView: View {
 
-    @StateObject var user: UserInfo = UserInfo()
-
     @StateObject var viewModel = MainViewModel()
 
     var body: some View {
         NavigationView {
-            if user.loggedIn {
+            if !viewModel.userId.isEmpty {
                 AccountView
             } else {
-                LoginView()
+                LoginView(userId: $viewModel.userId)
             }
         }
-        .environmentObject(user)
+        .environmentObject(viewModel)
+
+
     }
 }
 
@@ -31,16 +31,17 @@ extension MainView {
 
     var AccountView: some View {
         TabView {
-            ToDoListView()
+            HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house")
+                        .foregroundColor(.primary)
                 }
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
+                        .foregroundColor(.primary)
                 }
         }
-        .environmentObject(viewModel)
     }
 
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
 
     @StateObject var viewModel = LoginViewModel()
-    @EnvironmentObject var user: UserInfo
+    @Binding var userId: String
 
     var body: some View {
 
@@ -19,25 +19,30 @@ struct LoginView: View {
             GradientView()
             
             VStack {
-                
                 HeaderView()
 
-                VStack (spacing: 10) {
-                    TextFieldView(input: $viewModel.email, isSecure: false)
-                    TextFieldView(input: $viewModel.password, isSecure: true)
-                }
-                .padding(.top, ScreenSize.width/6)
+                TextFieldView(input: $viewModel.email, isSecure: false)
+                    .frame(width: ScreenSize.defaultWidth)
+                    .padding(.top, ScreenSize.width/8)
+
+                TextFieldView(input: $viewModel.password, isSecure: true)
+                    .frame(width: ScreenSize.defaultWidth)
 
                 PrimaryButton(title: "Login") {
-                    viewModel.login { user.loggedIn = true }
+                    viewModel.login { userId in
+                        self.userId = userId
+                    }
                 }
-                .padding(.bottom, ScreenSize.width/8)
+                .padding(.top, ScreenSize.width/12)
+                .padding(.bottom, ScreenSize.width/10)
                 
                 VStack (spacing: 5) {
                     Text("New around here?")
                     Button("Create An Account") {
                         viewModel.isRegisterPresented = true
                     }
+                    .bold()
+                    .foregroundColor(Color.secondary)
                 }
                 .padding(.bottom, 100)
                 
@@ -53,6 +58,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(userId: .constant(""))
     }
 }

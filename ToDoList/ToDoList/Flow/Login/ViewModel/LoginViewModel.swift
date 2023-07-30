@@ -18,7 +18,7 @@ class LoginViewModel: ObservableObject {
 
     init() {}
     
-    func login(completion: @escaping () -> Void) {
+    func login(completion: @escaping (String) -> Void) {
 
         email.validation = getEmailValidationStatus()
         password.validation = getPasswordValidationStatus()
@@ -33,9 +33,7 @@ class LoginViewModel: ObservableObject {
                 return
             }
 
-            print("userId: ", userId)
-
-            completion()
+            completion(userId)
         }
     }
     

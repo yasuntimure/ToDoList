@@ -10,21 +10,18 @@ import SwiftUI
 struct HeaderView: View {
 
     @Environment (\.colorScheme) var colorScheme: ColorScheme
-    
-    @State var title: String = "To Do List"
-    @State var subTitle: String = "Lets get started!"
-    
+
     var body: some View {
             Image("logo")
                 .resizable()
-                .frame(width: ScreenSize.width/1.2, height: ScreenSize.width/1.2)
+                .frame(width: ScreenSize.width/1.6, height: ScreenSize.width/1.6)
                 .cornerRadius(ScreenSize.width)
                 .foregroundColor(.white)
                 .aspectRatio(contentMode: .fill)
                 .padding(.top, ScreenSize.width/3.5)
                 .shadow(
                     color: colorScheme == .light ? .black : .white,
-                    radius: 15
+                    radius: 8
                 )
     }
 }

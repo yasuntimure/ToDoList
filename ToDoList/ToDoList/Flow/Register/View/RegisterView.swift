@@ -18,11 +18,17 @@ struct RegisterView: View {
             GradientView()
             
             VStack {
-                
-                HeaderView(
-                    title: "Register",
-                    subTitle: "Creat an Acccount"
-                )
+
+                VStack (alignment: .leading, spacing: 5) {
+                    Text("Register")
+                        .font(.system(size: 45))
+                        .bold()
+                    Text("Create a new Account!")
+                        .font(.system(size: 30))
+                        .bold()
+                }
+                .padding(.top, ScreenSize.width/4)
+                .frame(width: ScreenSize.defaultWidth)
                 
                 VStack (spacing: 10) {
 
@@ -32,8 +38,10 @@ struct RegisterView: View {
                     TextFieldView(input: $viewModel.inputs.confirmPassword, isSecure: true)
                     
                 }
-                .padding(.top, ScreenSize.width/10)
-                
+                .frame(width: ScreenSize.defaultWidth)
+                .padding(.top)
+
+
                 PrimaryButton(title: "Register") {
                     viewModel.register { dismiss() }
                 }

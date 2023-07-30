@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewItemView: View {
 
-    @EnvironmentObject var viewModel: MainViewModel
+    @EnvironmentObject var viewModel: ToDoListViewModel
 
     @Environment(\.dismiss) var dismiss
 
@@ -22,7 +22,7 @@ struct NewItemView: View {
                     .bold()
                     .font(.system(size: 32))
                     .padding(.top, 10)
-                    .shadow(radius: 12)
+                    .shadow(radius: 8)
 
                 TextField("Title", text: $viewModel.newItem.title)
                     .autocorrectionDisabled()
