@@ -29,6 +29,7 @@ struct HomeView: View {
                     .onDelete(perform: viewModel.deleteItems(at:))
                     .onMove(perform: viewModel.moveItems(from:to:))
                 }
+                .background(.clear)
                 .onAppear { viewModel.fetchLists() }
                 .refreshable { viewModel.fetchLists() }
                 .toolbar {

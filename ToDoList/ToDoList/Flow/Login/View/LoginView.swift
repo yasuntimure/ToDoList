@@ -10,7 +10,6 @@ import SwiftUI
 struct LoginView: View {
 
     @StateObject var viewModel = LoginViewModel()
-    @Binding var userId: String
 
     var body: some View {
 
@@ -29,9 +28,7 @@ struct LoginView: View {
                     .frame(width: ScreenSize.defaultWidth)
 
                 PrimaryButton(title: "Login") {
-                    viewModel.login { userId in
-                        self.userId = userId
-                    }
+                    viewModel.login()
                 }
                 .padding(.top, ScreenSize.width/12)
                 .padding(.bottom, ScreenSize.width/10)
@@ -51,13 +48,13 @@ struct LoginView: View {
                 RegisterView()
                     .presentationDetents([.large])
             }
-
+            .userId(viewModel.userId)
         }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(userId: .constant(""))
+        LoginView()
     }
 }

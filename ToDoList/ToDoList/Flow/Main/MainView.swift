@@ -16,10 +16,13 @@ struct MainView: View {
             if !viewModel.userId.isEmpty {
                 AccountView
             } else {
-                LoginView(userId: $viewModel.userId)
+                LoginView()
             }
         }
         .environmentObject(viewModel)
+        .onUserIdChange { userId in
+            self.viewModel.userId = userId
+        }
 
 
     }

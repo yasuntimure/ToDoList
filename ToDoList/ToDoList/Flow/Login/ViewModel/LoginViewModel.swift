@@ -16,9 +16,11 @@ class LoginViewModel: ObservableObject {
 
     @Published var isRegisterPresented = false
 
+    @Published var userId: String = ""
+
     init() {}
     
-    func login(completion: @escaping (String) -> Void) {
+    func login() {
 
         email.validation = getEmailValidationStatus()
         password.validation = getPasswordValidationStatus()
@@ -33,7 +35,7 @@ class LoginViewModel: ObservableObject {
                 return
             }
 
-            completion(userId)
+            self?.userId = userId
         }
     }
     

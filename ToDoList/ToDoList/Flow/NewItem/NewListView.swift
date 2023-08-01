@@ -17,7 +17,6 @@ struct NewListView: View {
 
     var body: some View {
         ZStack {
-            GradientView()
 
             ScrollView (.vertical)  {
                 Text("Add New List")

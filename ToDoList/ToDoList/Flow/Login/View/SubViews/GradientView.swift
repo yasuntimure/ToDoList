@@ -9,13 +9,13 @@ import SwiftUI
 
 struct GradientView: View {
 
-    @State var mColor: Color = .gray
+    @State var mColor: Color = .primary
 
     var body: some View {
         LinearGradient(
             gradient: Gradient(colors: [mColor.opacity(0.15), mColor.opacity(0.0)]),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
+            startPoint: .top,
+            endPoint: .bottom
         )
         .edgesIgnoringSafeArea(.all)
     }

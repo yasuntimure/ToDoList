@@ -14,6 +14,7 @@
 		D021E1A82A75D7FD00801267 /* ToDoListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021E1A72A75D7FD00801267 /* ToDoListRow.swift */; };
 		D021E1AA2A75F38D00801267 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021E1A92A75F38D00801267 /* NewListView.swift */; };
 		D021E1AC2A760A6400801267 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021E1AB2A760A6400801267 /* LoadingView.swift */; };
+		D021E1FF2A78C4CB00801267 /* PreferenceKeyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021E1FE2A78C4CB00801267 /* PreferenceKeyExtension.swift */; };
 		D039E32E2A74ADB30019B01A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D039E32D2A74ADB30019B01A /* HomeView.swift */; };
 		D039E3302A74AFF90019B01A /* ToDoListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D039E32F2A74AFF90019B01A /* ToDoListModel.swift */; };
 		D06E92312A64C8CF0064137D /* EncodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E92302A64C8CF0064137D /* EncodableExtension.swift */; };
@@ -56,6 +57,7 @@
 		D021E1A72A75D7FD00801267 /* ToDoListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListRow.swift; sourceTree = "<group>"; };
 		D021E1A92A75F38D00801267 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		D021E1AB2A760A6400801267 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		D021E1FE2A78C4CB00801267 /* PreferenceKeyExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKeyExtension.swift; sourceTree = "<group>"; };
 		D039E32D2A74ADB30019B01A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		D039E32F2A74AFF90019B01A /* ToDoListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListModel.swift; sourceTree = "<group>"; };
 		D06E92302A64C8CF0064137D /* EncodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtension.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				D06E92302A64C8CF0064137D /* EncodableExtension.swift */,
+				D021E1FE2A78C4CB00801267 /* PreferenceKeyExtension.swift */,
 				D06E92352A672CA60064137D /* AlignmentExtension.swift */,
 				D06E92432A685BB30064137D /* BindingExtension.swift */,
 			);
@@ -452,6 +455,7 @@
 				D0FF05E02A5CE133005B1C5B /* ToDoListItemRow.swift in Sources */,
 				D06E92362A672CA60064137D /* AlignmentExtension.swift in Sources */,
 				D0FF05E32A5CE160005B1C5B /* User.swift in Sources */,
+				D021E1FF2A78C4CB00801267 /* PreferenceKeyExtension.swift in Sources */,
 				D0FF060C2A5F3103005B1C5B /* RegisterView.swift in Sources */,
 				D00AA1112A6DF8640021E06D /* ProfileImagePicker.swift in Sources */,
 				D00AA1132A6DFEFB0021E06D /* SecondaryButton.swift in Sources */,
