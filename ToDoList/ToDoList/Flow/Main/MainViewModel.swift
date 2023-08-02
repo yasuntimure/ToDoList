@@ -25,6 +25,8 @@ class MainViewModel: ObservableObject {
 
     @Published var userId: String = ""
 
+    @Published var isLoading: Bool = false
+
     private var handler: AuthStateDidChangeListenerHandle?
 
     init() {
@@ -42,6 +44,8 @@ class MainViewModel: ObservableObject {
 
     func fetchLists() {
         lists = []
+
+        isLoading = true
 
         Firestore.firestore()
             .collection("users")
@@ -71,6 +75,8 @@ class MainViewModel: ObservableObject {
                         print("Error decoding item: \(error)")
                     }
                 }
+
+                isLoading = false
             }
         }
     }

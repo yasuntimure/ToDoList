@@ -15,6 +15,12 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
+
+                if viewModel.isLoading {
+                    LoadingView()
+                        .frame(width: 50, height: 50, alignment: .center)
+                }
+
                 List {
                     ForEach ($viewModel.lists) { $list in
                         NavigationLink {

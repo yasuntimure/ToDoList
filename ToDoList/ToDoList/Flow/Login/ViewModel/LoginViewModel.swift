@@ -13,9 +13,7 @@ class LoginViewModel: ObservableObject {
 
     @Published var email: InputField = InputField(placeholder: "Enter Email", text: "", validation: Validation.none)
     @Published var password: InputField = InputField(placeholder: "Enter Password", text: "", validation: Validation.none)
-
     @Published var isRegisterPresented = false
-
     @Published var userId: String = ""
 
     init() {}
