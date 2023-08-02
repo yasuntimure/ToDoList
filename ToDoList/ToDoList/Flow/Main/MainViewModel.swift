@@ -76,7 +76,7 @@ class MainViewModel: ObservableObject {
                     }
                 }
 
-                isLoading = false
+                self.isLoading = false
             }
         }
     }
