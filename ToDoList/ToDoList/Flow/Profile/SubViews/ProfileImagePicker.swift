@@ -14,6 +14,8 @@ struct ProfileImagePicker: View {
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var isLoading = false
 
+    var size = ScreenSize.width/3.5
+
     var body: some View {
         ZStack {
             PhotosPicker(selection: $selectedPhoto, matching: .images) {
@@ -21,8 +23,13 @@ struct ProfileImagePicker: View {
                     .resizable()
                     .foregroundColor(.gray)
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: ScreenSize.width/3.5, height: ScreenSize.width/3.5)
-                    .cornerRadius(ScreenSize.width/3.5)
+                    .frame(width: size, height: size)
+                    .cornerRadius(size)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: size)
+                            .stroke(Color.primary, lineWidth: 2)
+                    )
+                    .shadow(radius: 0.5)
             }
             if isLoading {
                 ProgressView()

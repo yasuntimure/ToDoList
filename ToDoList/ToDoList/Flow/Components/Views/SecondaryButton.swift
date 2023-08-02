@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SecondaryButton: View {
 
+    @Environment (\.colorScheme) var color
+
     @State var title: String
     @State var width: CGFloat = ScreenSize.width/4
     @State var height: CGFloat = ScreenSize.width/8
@@ -18,11 +20,15 @@ struct SecondaryButton: View {
         Button(action: action) {
             ZStack (alignment: .center) {
                 RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.primary)
+                    .overlay {
+                        RoundedRectangle(cornerSize: size())
+                            .stroke(Color.primary, lineWidth: 2)
+                    }
 
                 Text(title)
                     .font(.system(size: 14))
-                    .foregroundColor(.white)
+                    .foregroundColor(color == .light ? .white : .black)
                     .bold()
             }
             .padding(.top)
@@ -30,6 +36,11 @@ struct SecondaryButton: View {
                    height: height)
         }
     }
+
+    private func size() -> CGSize {
+        CGSize(width: width, height: height)
+    }
+
 }
 
 struct SecondaryButton_Previews: PreviewProvider {
