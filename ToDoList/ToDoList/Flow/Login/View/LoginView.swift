@@ -9,7 +9,13 @@ import SwiftUI
 
 struct LoginView: View {
 
+    private enum Fields {
+        case email, password
+    }
+
     @StateObject var viewModel = LoginViewModel()
+
+    @FocusState private var focusedField: Fields?
 
     var body: some View {
 
@@ -20,12 +26,19 @@ struct LoginView: View {
             VStack {
                 HeaderView()
 
-                TextFieldView(input: $viewModel.email, isSecure: false)
+                TextFieldView(input: $viewModel.email)
                     .frame(width: ScreenSize.defaultWidth)
                     .padding(.top, ScreenSize.width/8)
+                    .focused($focusedField, equals: .email)
+                    .onSubmit(of: .text) {
+                        if focusedField == .email {
+                            focusedField = .password
+                        }
+                    }
 
                 TextFieldView(input: $viewModel.password, isSecure: true)
                     .frame(width: ScreenSize.defaultWidth)
+                    .focused($focusedField, equals: .password)
 
                 PrimaryButton(title: "Login") {
                     viewModel.login()

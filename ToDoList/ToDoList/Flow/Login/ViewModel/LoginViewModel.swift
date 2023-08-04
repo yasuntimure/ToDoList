@@ -8,20 +8,42 @@
 import Foundation
 import Firebase
 import SwiftUI
+import Combine
 
 class LoginViewModel: ObservableObject {
+
+    private var subscription = Set<AnyCancellable>()
 
     @Published var email: InputField = InputField(placeholder: "Enter Email", text: "", validation: Validation.none)
     @Published var password: InputField = InputField(placeholder: "Enter Password", text: "", validation: Validation.none)
     @Published var isRegisterPresented = false
     @Published var userId: String = ""
 
-    init() {}
+    @Published var showAlert: Bool = false
+    @Published var errorMessage: String = ""
+
+    init() {
+        $email
+            .dropFirst(4)
+            .sink { email in
+                if email.text.count > 3 {
+                    self.validateEmail()
+                }
+        }.store(in: &subscription)
+
+        $password
+            .dropFirst(4)
+            .sink { password in
+                if password.text.count > 5 {
+                    self.validatePassword()
+                }
+        }.store(in: &subscription)
+    }
     
     func login() {
 
-        email.validation = getEmailValidationStatus()
-        password.validation = getPasswordValidationStatus()
+        validateEmail()
+        validatePassword()
         
         guard email.validation == .email(.approved) && password.validation == .password(.approved) else { return }
             
@@ -30,6 +52,8 @@ class LoginViewModel: ObservableObject {
         
             guard let userId = result?.user.uid, error == nil else {
                 print("Error: \(error!.localizedDescription)")
+                self?.errorMessage = error?.localizedDescription ?? "Could not create a new account!"
+                self?.showAlert = true
                 return
             }
 
@@ -44,30 +68,34 @@ class LoginViewModel: ObservableObject {
 
 extension LoginViewModel {
     
-    func getEmailValidationStatus() -> Validation {
-        
+    func validateEmail() {
+
         guard !email.text.trimmingCharacters(in: .whitespaces).isEmpty else {
-            return .email(.empty)
+            email.validation = .email(.empty)
+            return
         }
-        
+
         guard email.text.contains("@") && email.text.contains(".") else {
-            return .email(.invalid)
+            email.validation = .email(.invalid)
+            return
         }
-        
-        return .email(.approved)
+
+        email.validation = .email(.approved)
     }
     
-    func getPasswordValidationStatus() -> Validation {
-        
+    func validatePassword() {
+
         guard !password.text.trimmingCharacters(in: .whitespaces).isEmpty else {
-            return .password(.empty)
+            password.validation = .password(.empty)
+            return
         }
-        
+
         guard password.text.count < 64 && password.text.count >= 6 else {
-            return .password(.invalid)
+            password.validation = .password(.invalid)
+            return
         }
-        
-        return .password(.approved)
+
+        password.validation = .password(.approved)
     }
 }
 

@@ -50,7 +50,7 @@ struct ProfileView: View {
                 }
                 .padding(.top)
 
-                CarouselView()
+                CarouselView(lists: viewModel.lists)
                     .padding(.top, 50)
 
                 Spacer()
