@@ -54,6 +54,7 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
         }
+        .preferredColorScheme(viewModel.displayMode.colorScheme)
         .environmentObject(viewModel)
 
     }

@@ -17,11 +17,9 @@ struct NewListView: View {
 
     var body: some View {
         ZStack {
-
             ScrollView (.vertical)  {
                 Text("Add New List")
-                    .bold()
-                    .font(.system(size: 32))
+                    .font(.system(size: 32)).bold()
                     .padding(.top, 35)
                     .shadow(radius: 1, x: 1, y: 1)
 
@@ -29,7 +27,7 @@ struct NewListView: View {
                     TextField("Title", text: $viewModel.newList.title)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
-                        .frame(height: 70)
+                        .frame(height: 60)
                         .focused($titleFocused)
 
                     TextField("Description", text: $viewModel.newList.description)

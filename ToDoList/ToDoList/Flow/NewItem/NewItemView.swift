@@ -13,31 +13,33 @@ struct NewItemView: View {
 
     @Environment(\.dismiss) var dismiss
 
+    @FocusState var titleFocused: Bool
+
     var body: some View {
         ZStack {
-            GradientView()
-
             ScrollView (.vertical)  {
                 Text("Add New Item")
-                    .bold()
-                    .font(.system(size: 32))
-                    .padding(.top, 10)
-                    .shadow(radius: 8)
+                    .font(.system(size: 32)).bold()
+                    .padding(.top, 35)
+                    .shadow(radius: 1, x: 1, y: 1)
 
-                TextField("Title", text: $viewModel.newItem.title)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .frame(height: 50)
+                VStack (spacing: 10) {
+                    TextField("Title", text: $viewModel.newItem.title)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .frame(height: 60)
+                        .focused($titleFocused)
 
-                TextField("Description", text: $viewModel.newItem.description)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .frame(minHeight: 80, maxHeight: 500)
+                    TextField("Description", text: $viewModel.newItem.description)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .frame(minHeight: 80, maxHeight: 500)
 
-
-                DatePicker("Date", selection: $viewModel.newItem.date, displayedComponents: [.date, .hourAndMinute])
-                    .datePickerStyle(.graphical)
-                    .frame(height: ScreenSize.width)
+                    DatePicker("Date", selection: $viewModel.newItem.date, displayedComponents: [.date, .hourAndMinute])
+                        .datePickerStyle(.compact)
+                        .padding(.top)
+                }
+                .padding(.horizontal, 25)
 
                 PrimaryButton(title: "Save") {
                     if viewModel.canSave {
@@ -47,12 +49,17 @@ struct NewItemView: View {
                         viewModel.showAlert = true
                     }
                 }
+                .frame(width: ScreenSize.width)
+                .padding(.top)
 
                 .alert(isPresented: $viewModel.showAlert) {
                     Alert(title: Text("Please fill all fields!"))
                 }
             }
             .padding(.horizontal, 25)
+        }
+        .onAppear {
+            titleFocused = true
         }
     }
 }

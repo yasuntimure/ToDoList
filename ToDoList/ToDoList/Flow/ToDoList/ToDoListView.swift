@@ -49,7 +49,7 @@ struct ToDoListView: View {
 
                 .sheet(isPresented: $viewModel.newItemViewPresented) {
                     NewItemView()
-                        .presentationDetents([.large])
+                        .presentationDetents([.fraction(0.55)])
                         .environmentObject(viewModel)
                 }
 

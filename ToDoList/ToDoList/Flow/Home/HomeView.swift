@@ -48,7 +48,11 @@ struct HomeView: View {
             .sheet(isPresented: $viewModel.newListViewPresented) {
                 NewListView()
                     .presentationDetents([.fraction(0.45)])
-                    .environmentObject(viewModel)
+
+            }
+            .sheet(isPresented: $viewModel.settingsViewPresented) {
+                SettingsView(darkMode: colorScheme == .dark)
+                    .presentationDetents([.fraction(0.45)])
             }
 
             plusButton
@@ -65,14 +69,14 @@ struct HomeView: View {
 extension HomeView {
 
     var settingsViewNavigation: some View {
-        NavigationLink {
-            SettingsView(darkMode: colorScheme == .dark)
-        } label: {
-            Image(systemName: "gear")
-                .resizable()
-                .foregroundColor(.primary)
-                .frame(width: 25, height: 25)
-        }
+        Image(systemName: "gear")
+            .resizable()
+            .foregroundColor(.primary)
+            .frame(width: 25, height: 25)
+            .onTapGesture {
+                viewModel.settingsViewPresented = true
+            }
+
     }
 }
 

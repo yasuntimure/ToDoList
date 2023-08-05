@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 import FirebaseAuth
 import FirebaseFirestore
 
@@ -26,11 +25,10 @@ enum DisplayMode: Int {
 
 class MainViewModel: ObservableObject {
 
-    private var subscribers = Set<AnyCancellable>()
-
     @AppStorage("displayMode") var displayMode: DisplayMode = .system
 
     @Published var newListViewPresented = false
+    @Published var settingsViewPresented = false
     @Published var lists: [ToDoListModel] = []
     @Published var newList: ToDoList = ToDoList()
     @Published var showAlert: Bool = false
@@ -49,12 +47,6 @@ class MainViewModel: ObservableObject {
                 self?.userId = uid
             }
         }
-
-//        $darkModeSelected
-//            .dropFirst()
-//            .sink { [weak self] darkModeSelected in
-//            self?.displayMode = darkModeSelected ? .dark : .light
-//        }.store(in: &subscribers)
     }
 
     var canSave: Bool {
