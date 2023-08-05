@@ -12,9 +12,7 @@ struct SettingsView: View {
 
     @EnvironmentObject var viewModel: MainViewModel
 
-    @Environment (\.colorScheme) var colorScheme
-
-    @State var onDarkMode: Bool = false
+    @State var darkMode: Bool
 
     var body: some View {
 
@@ -35,8 +33,11 @@ struct SettingsView: View {
                 }
                 .styleSettingRow()
 
-                Toggle("Select Appearance", isOn: $onDarkMode)
+                Toggle("Select Apearance", isOn: $darkMode)
                     .styleSettingRow()
+                    .onChange(of: darkMode) { isDarkMode in
+                        viewModel.displayMode = isDarkMode ? .dark : .light
+                    }
 
                 SecondaryButton(title: "Logout") {
                     viewModel.logout {
@@ -62,7 +63,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(darkMode: true)
             .environmentObject(MainViewModel())
     }
 }

@@ -6,26 +6,40 @@
 //
 
 import SwiftUI
+import Combine
 import FirebaseAuth
 import FirebaseFirestore
 
+enum DisplayMode: Int {
+
+    case system, dark, light
+
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .system: return nil
+        case .dark: return ColorScheme.dark
+        case .light: return ColorScheme.light
+        }
+    }
+}
+
+
 class MainViewModel: ObservableObject {
 
+    private var subscribers = Set<AnyCancellable>()
+
+    @AppStorage("displayMode") var displayMode: DisplayMode = .system
+
     @Published var newListViewPresented = false
-
     @Published var lists: [ToDoListModel] = []
-
     @Published var newList: ToDoList = ToDoList()
-
     @Published var showAlert: Bool = false
     @Published var errorMessage: String = ""
-
     @Published var userName: String = "Eyup Yasuntimur"
     @Published var joinDate: String = "22.07.2023"
-
     @Published var userId: String = ""
-
     @Published var isLoading: Bool = false
+    @Published var darkModeSelected: Bool = false
 
     private var handler: AuthStateDidChangeListenerHandle?
 
@@ -35,6 +49,12 @@ class MainViewModel: ObservableObject {
                 self?.userId = uid
             }
         }
+
+//        $darkModeSelected
+//            .dropFirst()
+//            .sink { [weak self] darkModeSelected in
+//            self?.displayMode = darkModeSelected ? .dark : .light
+//        }.store(in: &subscribers)
     }
 
     var canSave: Bool {
@@ -53,32 +73,32 @@ class MainViewModel: ObservableObject {
             .collection("notes")
             .getDocuments { (querySnapshot, err) in
 
-            if let err = err {
+                if let err = err {
 
-                print("Error getting documents: \(err)")
+                    print("Error getting documents: \(err)")
 
-            } else {
+                } else {
 
-                guard let documents = querySnapshot?.documents else {
-                    print("Documents couldnt casted")
-                    return
-                }
-
-                for document in documents {
-                    let result = Result {
-                        try document.data(as: ToDoListModel.self)
+                    guard let documents = querySnapshot?.documents else {
+                        print("Documents couldnt casted")
+                        return
                     }
-                    switch result {
-                    case .success(let item):
-                        self.lists.append(item)
-                    case .failure(let error):
-                        print("Error decoding item: \(error)")
-                    }
-                }
 
-                self.isLoading = false
+                    for document in documents {
+                        let result = Result {
+                            try document.data(as: ToDoListModel.self)
+                        }
+                        switch result {
+                        case .success(let item):
+                            self.lists.append(item)
+                        case .failure(let error):
+                            print("Error decoding item: \(error)")
+                        }
+                    }
+
+                    self.isLoading = false
+                }
             }
-        }
     }
 
     func deleteItems(at indexSet: IndexSet) {
@@ -89,12 +109,12 @@ class MainViewModel: ObservableObject {
                 .collection("notes")
                 .document(lists[index].id)
                 .delete { err in
-                if let err = err {
-                    print("Error removing document: \(err)")
-                } else {
-                    print("Document successfully removed!")
+                    if let err = err {
+                        print("Error removing document: \(err)")
+                    } else {
+                        print("Document successfully removed!")
+                    }
                 }
-            }
         }
         lists.remove(atOffsets: indexSet)
     }

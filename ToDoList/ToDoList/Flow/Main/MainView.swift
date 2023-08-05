@@ -9,12 +9,14 @@ import SwiftUI
 
 struct MainView: View {
 
+    @Environment (\.colorScheme) var colorScheme
+
     @StateObject var viewModel = MainViewModel()
 
     var body: some View {
         NavigationView {
             if !viewModel.userId.isEmpty {
-                AccountView
+                HomeView()
             } else {
                 LoginView()
             }
@@ -23,32 +25,12 @@ struct MainView: View {
         .onUserIdChange { userId in
             self.viewModel.userId = userId
         }
-
-
-    }
-}
-
-// MARK: - Account TabView
-
-extension MainView {
-
-    var AccountView: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                        .foregroundColor(.primary)
-                }
-            SettingsView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.circle")
-                        .foregroundColor(.primary)
-                }
+        .preferredColorScheme(viewModel.displayMode.colorScheme)
+        .onAppear {
+            viewModel.darkModeSelected = colorScheme == .dark
         }
     }
-
 }
-
 
 // MARK: - Preview
 
