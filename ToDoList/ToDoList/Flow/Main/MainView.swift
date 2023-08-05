@@ -39,7 +39,7 @@ extension MainView {
                     Label("Home", systemImage: "house")
                         .foregroundColor(.primary)
                 }
-            ProfileView()
+            SettingsView()
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                         .foregroundColor(.primary)

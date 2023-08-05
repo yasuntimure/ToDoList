@@ -31,9 +31,7 @@ struct LoginView: View {
                     .padding(.top, ScreenSize.width/8)
                     .focused($focusedField, equals: .email)
                     .onSubmit(of: .text) {
-                        if focusedField == .email {
-                            focusedField = .password
-                        }
+                        focusedField = (focusedField == .email) ? .password : nil
                     }
 
                 TextFieldView(input: $viewModel.password, isSecure: true)

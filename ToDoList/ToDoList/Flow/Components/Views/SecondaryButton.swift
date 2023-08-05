@@ -12,33 +12,19 @@ struct SecondaryButton: View {
     @Environment (\.colorScheme) var color
 
     @State var title: String
-    @State var width: CGFloat = ScreenSize.width/4
-    @State var height: CGFloat = ScreenSize.width/8
+    @State var size: CGSize = CGSize(width: ScreenSize.defaultWidth,
+                                     height: ScreenSize.defaultHeight)
     @State var action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            ZStack (alignment: .center) {
-                RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(.primary)
-                    .overlay {
-                        RoundedRectangle(cornerSize: size())
-                            .stroke(Color.primary, lineWidth: 2)
-                    }
-
-                Text(title)
-                    .font(.system(size: 14))
-                    .foregroundColor(color == .light ? .white : .black)
-                    .bold()
-            }
-            .padding(.top)
-            .frame(width: width,
-                   height: height)
+            Text(title)
+                .frame(width: size.width, height: size.height)
+                .font(.system(size: 16)).bold()
+                .foregroundColor(color == .light ? .white : .black)
+                .background(color == .light ? .black : .white)
+                .cornerRadius(size.height)
         }
-    }
-
-    private func size() -> CGSize {
-        CGSize(width: width, height: height)
     }
 
 }

@@ -39,7 +39,8 @@ struct HomeView: View {
                 .onAppear { viewModel.fetchLists() }
                 .refreshable { viewModel.fetchLists() }
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
+                    ToolbarItem(placement: .navigationBarLeading) { EditButton() }
+                    ToolbarItem(placement: .navigationBarTrailing) { settingsViewNavigation }
                 }
                 .listStyle(.plain)
                 .navigationTitle("Notes")
@@ -59,6 +60,21 @@ struct HomeView: View {
 
 }
 
+// MARK: - Settings View Navigation
+
+extension HomeView {
+
+    var settingsViewNavigation: some View {
+        NavigationLink {
+            SettingsView()
+        } label: {
+            Image(systemName: "gear")
+                .resizable()
+                .foregroundColor(.primary)
+                .frame(width: 25, height: 25)
+        }
+    }
+}
 
 // MARK: - Plus Button
 
