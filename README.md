@@ -1,37 +1,29 @@
 # ToDoList
 
-ToDoList is a Swift-based application that allows users to manage their tasks in a simple and efficient way.
+ToDoList is a basic note-taking app developed using SwiftUI. The purpose of this project is to experiment with and gain a deep understanding of data flow, property wrappers, modifiers, and other features in SwiftUI. 
 
-## Structure
+The app utilizes Firestore for its database needs. Additionally, the app includes login and registration pages, enabling you to store real-time data. Consequently, you can use this app as a to-do list, as it provides all necessary features right from the initial phase.
 
-The application is structured into several main components:
+## Features
+
+- SwiftUI for UI development
+- Firestore for database
+- Login and Registration functionality
+- Real-time data storage
+- Comprehensive to-do list features
+
+## Project Structure
+
+The project is structured as follows:
 
 - `ToDoList.xcodeproj`: Contains the Xcode project files.
-- `ToDoList`: Contains the main application code, organized into several subdirectories:
-  - `App`: Contains the main application file `ToDoListApp.swift` and `GoogleService-Info.plist`.
-  - `Extensions`: Contains various Swift extensions to enhance the functionality of the application.
-  - `Flow`: Contains the main flow of the application, with each subdirectory representing a different screen or feature of the app.
-    - `Components`: Contains reusable views.
-    - `Home`: Contains the home view and its related files.
-    - `Login`: Contains the login view and its related files.
-    - `Main`: Contains the main view and its related files.
-    - `NewItem`: Contains the views for adding new items.
-    - `Profile`: Contains the profile and settings views.
-    - `Register`: Contains the register view and its related files.
-    - `ToDoList`: Contains the ToDoList view and its related files.
-  - `Model`: Contains the data models used in the application.
-  - `Preview Content`: Contains assets for previewing the application.
-  - `Resources`: Contains various resources used in the application, such as images and color sets.
-  - `Utils`: Contains utility files.
+- `ToDoList`: Contains the main app files.
+  - `App`: Contains the main app file and Google services info.
+  - `Extensions`: Contains various Swift extensions used in the project.
+  - `Flow`: Contains the main components of the app, including views and view models for Home, Login, Main, NewItem, Profile, Register, and ToDoList.
+  - `Model`: Contains the data models used in the project.
+  - `Resources`: Contains the app's assets and utility files.
 
-## Setup
+## Usage
 
-To run the application, you need to have Xcode installed on your machine. Open the `ToDoList.xcodeproj` file in Xcode, then build and run the application.
-
-## Contributing
-
-Contributions are welcome! Please read the contributing guidelines before making any changes.
-
-## License
-
-This project is licensed under the terms of the MIT license.
+To use this project, clone the repository and open `ToDoList.xcodeproj` in Xcode. Make sure you have the necessary credentials to connect to Firestore for the database functionality.
