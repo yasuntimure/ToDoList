@@ -12,6 +12,21 @@ The app utilizes Firestore for its database needs. Additionally, the app include
 - Real-time data storage
 - Comprehensive to-do list features
 
+### Previews
+
+https://github.com/yasuntimure/ToDoList/assets/58510802/42d6b22e-32ae-4780-972c-1b54a7415c3a
+
+https://github.com/yasuntimure/ToDoList/assets/58510802/b8536cfd-b9b9-4bdc-bc33-69e6b9945965
+
+https://github.com/yasuntimure/ToDoList/assets/58510802/5b20ca83-0921-46a0-9504-a2284c41d8ef
+
+https://github.com/yasuntimure/ToDoList/assets/58510802/13b193d7-ff92-4526-ba12-b6a60b8f8e41
+
+https://github.com/yasuntimure/ToDoList/assets/58510802/95636e4f-4eae-4541-ad6a-7f706d6a8f67
+
+
+
+
 ## Project Structure
 
 The project is structured as follows:
