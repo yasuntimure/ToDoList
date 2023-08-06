@@ -13,19 +13,13 @@ The app utilizes Firestore for its database needs. Additionally, the app include
 - Comprehensive to-do list features
 
 ### Previews
-
-https://github.com/yasuntimure/ToDoList/assets/58510802/42d6b22e-32ae-4780-972c-1b54a7415c3a
-
-https://github.com/yasuntimure/ToDoList/assets/58510802/b8536cfd-b9b9-4bdc-bc33-69e6b9945965
-
-https://github.com/yasuntimure/ToDoList/assets/58510802/5b20ca83-0921-46a0-9504-a2284c41d8ef
-
-https://github.com/yasuntimure/ToDoList/assets/58510802/13b193d7-ff92-4526-ba12-b6a60b8f8e41
-
-https://github.com/yasuntimure/ToDoList/assets/58510802/95636e4f-4eae-4541-ad6a-7f706d6a8f67
-
-
-
+<p float="left">
+  <img src="https://github.com/yasuntimure/ToDoList/assets/58510802/25308413-ef91-4bb2-be5f-57c32d6bf378" width="300" hspace="20"/>
+  <img src="https://github.com/yasuntimure/ToDoList/assets/58510802/88e80212-dd81-4ec4-a778-e4d20a283c53" width="300" hspace="20"/>
+  <img src="https://github.com/yasuntimure/ToDoList/assets/58510802/2648c626-43f5-462e-9857-c0e922eb4760" width="300" hspace="20"/>
+  <img src="https://github.com/yasuntimure/ToDoList/assets/58510802/fe8beca2-0343-4b48-9f9c-7e39c5583ee4" width="300" hspace="20"/>
+  <img src="https://github.com/yasuntimure/ToDoList/assets/58510802/d72d4668-d008-4e52-b118-ec3029c451fb" width="300" hspace="20"/>
+</p>
 
 ## Project Structure
 
