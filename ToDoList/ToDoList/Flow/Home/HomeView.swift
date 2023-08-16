@@ -37,7 +37,6 @@ struct HomeView: View {
                 .onMove(perform: viewModel.moveItems(from:to:))
             }
             .background(.clear)
-            .onAppear { viewModel.fetchLists() }
             .refreshable { viewModel.fetchLists() }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) { EditButton() }

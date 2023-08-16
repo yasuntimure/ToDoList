@@ -45,6 +45,7 @@ class MainViewModel: ObservableObject {
         self.handler = Auth.auth().addStateDidChangeListener { [weak self] _, user in
             if let uid = user?.uid, !uid.isEmpty {
                 self?.userId = uid
+                self?.fetchLists()
             }
         }
     }
@@ -88,7 +89,11 @@ class MainViewModel: ObservableObject {
                         }
                     }
 
-                    self.isLoading = false
+                    if self.lists.isEmpty {
+                        self.saveTemplateList()
+                    } else {
+                        self.isLoading = false
+                    }
                 }
             }
     }
@@ -142,6 +147,30 @@ class MainViewModel: ObservableObject {
         }
 
         completion()
+    }
+
+    func saveTemplateList() {
+
+        let list = ToDoListModel(id: UUID().uuidString,
+                                 title: "Quick Note",
+                                 description: "Complete your quick to do list!",
+                                 items: [],
+                                 date: Date().timeIntervalSince1970)
+
+        guard !userId.isEmpty else {
+            self.isLoading = false
+            return
+        }
+
+        // Save model
+        Firestore.firestore()
+            .collection("users")
+            .document(self.userId)
+            .collection("notes")
+            .document (list.id)
+            .setData(list.asDictionary())
+
+        self.fetchLists()
     }
 
 }
