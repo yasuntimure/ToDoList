@@ -20,15 +20,24 @@ struct LoginView: View {
     var body: some View {
 
         ZStack {
-            
+
             GradientView()
-            
+
             VStack {
+
                 HeaderView()
+                    .frame(width: ScreenSize.width - 50)
+                    .padding(.top)
+
+                Text("Sign In")
+                    .font(.system(size: 32)).bold()
+                    .foregroundColor(.secondary)
+                    .hSpacing(.leading)
+                    .padding([.leading], 30)
+                    .padding(.top)
 
                 TextFieldView(input: $viewModel.email)
                     .frame(width: ScreenSize.defaultWidth)
-                    .padding(.top, ScreenSize.width/8)
                     .focused($focusedField, equals: .email)
                     .onSubmit(of: .text) {
                         focusedField = (focusedField == .email) ? .password : nil
@@ -39,30 +48,68 @@ struct LoginView: View {
                     .focused($focusedField, equals: .password)
 
                 PrimaryButton(title: "Login") {
-                    viewModel.login()
+                    viewModel.login(with: .email)
                 }
-                .padding(.top, ScreenSize.width/12)
-                .padding(.bottom, ScreenSize.width/10)
-                
-                VStack (spacing: 5) {
-                    Text("New around here?")
-                    Button("Create An Account") {
-                        viewModel.isRegisterPresented = true
-                    }
-                    .bold()
-                    .foregroundColor(Color.secondary)
+                .shadow(radius: 2)
+
+                DividerLine()
+
+                // Sign In with Google
+                SignInWithButton(signInType: .google) {
+                    viewModel.login(with: .google)
                 }
-                .padding(.bottom, 100)
-                
+                .shadow(radius: 2)
+                .padding([.bottom], ScreenSize.width/10)
+
+                CreateAccountView()
+                    .padding(.bottom)
             }
+            .vSpacing(.bottom)
+
             .sheet(isPresented: $viewModel.isRegisterPresented) {
                 RegisterView()
                     .presentationDetents([.large])
             }
-            .userId(viewModel.userId)
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text(viewModel.errorMessage))
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func DividerLine() -> some View {
+        HStack (spacing: 12) {
+            RoundedRectangle(cornerRadius: 10)
+                .frame(height: 1.5)
+                .foregroundColor(.secondary)
+                .opacity(0.5)
+                .padding(.leading, 30)
+            Text("with")
+                .font(.system(size: 16)).bold()
+                .foregroundColor(.secondary)
+            RoundedRectangle(cornerRadius: 10)
+                .frame(height: 1.5)
+                .foregroundColor(.secondary)
+                .opacity(0.5)
+                .padding(.trailing, 30)
+        }
+        .padding([.top, .bottom], ScreenSize.width/20)
+    }
+
+    @ViewBuilder
+    private func CreateAccountView() -> some View {
+        VStack (spacing: 5) {
+            Text("New around here?")
+            Button("Create An Account") {
+                viewModel.isRegisterPresented = true
+            }
+            .bold()
+            .foregroundColor(Color.mTintColor.opacity(0.9))
         }
     }
 }
+
+
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

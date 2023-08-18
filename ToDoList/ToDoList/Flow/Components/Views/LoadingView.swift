@@ -17,7 +17,6 @@ struct LoadingView: View {
         Circle()
             .trim(from: 3/10, to: 1)
             .stroke(lineWidth: 4)
-            .frame(width: 40, height: 40)
             .rotationEffect(.degrees(self.rotation))
             .onAppear { rotation = (rotation == 0) ? 360 : 0 }
             .animation(Animation.linear(duration: 0.5).repeatForever(autoreverses: false))
