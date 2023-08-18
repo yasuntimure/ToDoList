@@ -11,7 +11,6 @@ import SwiftUI
 import Combine
 import GoogleSignIn
 
-
 class LoginViewModel: ObservableObject {
 
     private var subscription = Set<AnyCancellable>()
@@ -51,10 +50,6 @@ class LoginViewModel: ObservableObject {
         switch type {
         case .google:
             self.signInWithGoogle { [weak self] email, password in
-
-                print("Email: ", email)
-                print("Password: ", password)
-
                 self?.signIn(withEmail: email, password: password)
             }
         case .apple:
@@ -71,16 +66,13 @@ class LoginViewModel: ObservableObject {
     }
 
     private func signIn(withEmail: String, password: String) {
-        // Try Login
         Auth.auth().signIn(withEmail: withEmail, password: password) { [weak self] result, error in
-
             guard let user = result?.user, error == nil else {
                 self?.showAlert(message: error?.localizedDescription ?? "Could not create a new account!")
                 return
             }
-
             self?.userId = user.uid
-            let email = String(describing: user.email)
+            let email = user.displayName ?? "user"
             print("Success: \(email) logged in")
         }
     }
@@ -97,7 +89,6 @@ class LoginViewModel: ObservableObject {
     }
 
     private func signInWithGoogle(completion: @escaping (String, String) -> Void) {
-
         // Create Google Sign In configuration object.
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let config = GIDConfiguration(clientID: clientID)
@@ -120,7 +111,6 @@ class LoginViewModel: ObservableObject {
                 self?.showAlert(message: "An error occured while fetching data from google!")
                 return
             }
-
             completion(email, password)
         }
     }
@@ -135,10 +125,6 @@ class LoginViewModel: ObservableObject {
 // MARK: - Validation
 
 extension LoginViewModel {
-
-    func validateFields() {
-
-    }
     
     private func validateEmail() {
 
@@ -171,15 +157,12 @@ extension LoginViewModel {
     }
 }
 
-
-
 enum ValidationStatus: String {
     case approved = "Approved!"
     case empty = "is empty!"
     case invalid = "is invalid!"
     case notMatching = "is not matching!"
 }
-    
 
 enum Validation: Equatable {
     case name(ValidationStatus)

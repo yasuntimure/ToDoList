@@ -6,8 +6,11 @@
 //
 
 import Foundation
-import Firebase
+import SwiftUI
 import Combine
+import Firebase
+import FirebaseFirestore
+import GoogleSignIn
 
 class RegisterViewModel: ObservableObject {
 
@@ -52,40 +55,102 @@ class RegisterViewModel: ObservableObject {
                 }
         }.store(in: &subscription)
     }
-    
-    func register(_ completion: @escaping () -> Void) {
 
-        guard inputs.areValid() else {
-           return
+    func register(with type: SignInType, completion: @escaping () -> Void) {
+        switch type {
+        case .google:
+            signUpWithGoogle { [weak self] name, email, password in
+                self?.createUser(withEmail: email, password: password) { userId in
+                    let newUser = User (
+                        id: userId,
+                        name: name,
+                        email: email,
+                        password: password,
+                        joinDate: Date().timeIntervalSince1970
+                    )
+
+                    self?.insertToFirestore(newUser)
+                    completion()
+                }
+            }
+        case .apple:
+            break // TODO: Sign Up with Apple
+        case .email:
+            guard inputs.areValid() else {
+                showAlert(message: "Email or Password not approved!")
+               return
+            }
+
+            let name = inputs.name.text
+            let email = inputs.email.text
+            let password = inputs.password.text
+
+            self.createUser(withEmail: email, password: password) { [weak self] userId in
+                let newUser = User (
+                    id: userId,
+                    name: name,
+                    email: email,
+                    password: password,
+                    joinDate: Date().timeIntervalSince1970
+                )
+                self?.insertToFirestore(newUser)
+                completion()
+            }
         }
+    }
 
-        Auth.auth().createUser(withEmail: inputs.email.text, password: inputs.password.text) { [weak self] result, error in
+    private func createUser(withEmail: String, password: String, completion: @escaping (String) -> Void) {
+        Auth.auth().createUser(withEmail: withEmail, password: password) { [weak self] result, error in
             guard let userId = result?.user.uid, error == nil else {
-                self?.errorMessage = error?.localizedDescription ?? "Could not create a new account!"
-                self?.showAlert = true
+                self?.showAlert(message: error?.localizedDescription ?? "Could not create a new account!")
                 return
             }
-            
-            self?.insertUserId(userId)
-            completion()
+            completion(userId)
         }
     }
 
-    func insertUserId(_ userId: String) {
-        let newUser = User (
-            id: userId,
-            name: inputs.name.text,
-            email: inputs.email.text,
-            password: inputs.password.text,
-            joinDate: Date().timeIntervalSince1970
-        )
-
-        let database = Firestore.firestore()
-
-        database.collection("users")
-            .document(userId)
-            .setData(newUser.asDictionary())
+    private func insertToFirestore(_ user: User) {
+        Firestore.firestore().collection("users")
+            .document(user.id)
+            .setData(user.asDictionary())
     }
+
+    private func showAlert(message: String) {
+        errorMessage = message
+        showAlert = true
+    }
+
+
+    private func signUpWithGoogle(completion: @escaping (String, String, String) -> Void) {
+
+        // Create Google Sign In configuration object.
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+
+        // Prepare presenting viewController
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScenes = scenes.first as? UIWindowScene
+        let window = windowScenes?.windows.first
+        guard let rootViewController = window?.rootViewController else { return }
+
+        GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController) { [weak self] signInResult, error in
+            if let error = error {
+                self?.showAlert(message: "\(error.localizedDescription)")
+            }
+
+            guard let user = signInResult?.user else { return }
+
+            guard let name = user.profile?.givenName,
+                    let email = user.profile?.email,
+                    let password = user.userID else {
+                self?.showAlert(message: "An error occured while fetching data from google!")
+                return
+            }
+            completion(name, email, password)
+        }
+    }
+
 }
 
 

@@ -36,7 +36,7 @@ struct SignInWithButton: View {
     @State var signInType: SignInType
     @State var action: () -> Void
 
-    var cornerRadius: CGFloat = 20
+    var cornerRadius: CGFloat = 15
 
     var body: some View {
         Button(action: action) {
@@ -54,10 +54,9 @@ struct SignInWithButton: View {
             }
             .frame(width: width, height: height)
             .overlay(
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(Color.primary, lineWidth: 2)
             )
-            .cornerRadius(20)
         }
     }
 }

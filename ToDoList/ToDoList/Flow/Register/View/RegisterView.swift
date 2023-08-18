@@ -13,10 +13,9 @@ struct RegisterView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
+
         ZStack {
-            
             GradientView()
-            
             VStack {
 
                 VStack (alignment: .leading, spacing: 5) {
@@ -43,12 +42,17 @@ struct RegisterView: View {
 
 
                 PrimaryButton(title: "Register") {
-                    viewModel.register { dismiss() }
+                    viewModel.register(with: .email) { dismiss() }
                 }
-                .padding(.top, ScreenSize.width/15)
-                .padding(.bottom, ScreenSize.width/2)
-                
-                Spacer()
+
+                DividerLine()
+
+                // Sign Up with Google
+                SignInWithButton(signInType: .google) {
+                    viewModel.register(with: .google) { dismiss() }
+                }
+                .shadow(radius: 2)
+                .padding([.bottom], ScreenSize.width/4)
 
             }
             .alert(isPresented: $viewModel.showAlert) {
@@ -56,6 +60,26 @@ struct RegisterView: View {
             }
 
         }
+    }
+
+    @ViewBuilder
+    private func DividerLine() -> some View {
+        HStack (spacing: 12) {
+            RoundedRectangle(cornerRadius: 10)
+                .frame(height: 1.5)
+                .foregroundColor(.secondary)
+                .opacity(0.5)
+                .padding(.leading, 30)
+            Text("with")
+                .font(.system(size: 16)).bold()
+                .foregroundColor(.secondary)
+            RoundedRectangle(cornerRadius: 10)
+                .frame(height: 1.5)
+                .foregroundColor(.secondary)
+                .opacity(0.5)
+                .padding(.trailing, 30)
+        }
+        .padding([.top, .bottom], ScreenSize.width/20)
     }
 }
 
