@@ -24,3 +24,19 @@ extension View {
     }
 
 }
+
+// Login & Register View TextFieldStyle
+extension View {
+    func textFieldStyle() -> some View {
+        self
+            .frame(height: ScreenSize.defaultHeight)
+            .padding(.horizontal)
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color.primary, lineWidth: 2)
+            )
+            .padding(.horizontal)
+    }
+}
